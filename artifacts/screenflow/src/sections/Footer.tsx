@@ -1,58 +1,58 @@
 export function Footer() {
+  const links = {
+    Product: ["Features", "Pricing", "Download", "Changelog", "Roadmap"],
+    Resources: ["Blog", "Help Center", "Community", "API Docs", "Status"],
+    Company: ["About", "Careers", "Privacy Policy", "Terms of Service", "Press"],
+  };
+
   return (
-    <footer className="border-t border-white/10 bg-background pt-20 pb-10">
+    <footer className="border-t border-border bg-background pt-20 pb-10">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10 mb-16">
-          <div className="col-span-2 lg:col-span-2">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-16">
+          <div className="col-span-2">
             <div className="flex items-center gap-2 mb-6">
-              <div className="w-6 h-6 rounded bg-gradient-to-tr from-primary to-cyan-400 flex items-center justify-center text-white font-bold text-xs">
+              <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-primary to-cyan-400 flex items-center justify-center text-white font-bold text-sm">
                 S
               </div>
-              <span className="font-bold tracking-tight">ScreenFlow</span>
+              <span className="font-bold text-lg tracking-tight text-foreground">ScreenFlow</span>
             </div>
-            <p className="text-muted-foreground text-sm max-w-sm mb-6">
+            <p className="text-muted-foreground text-sm max-w-xs mb-8 leading-relaxed">
               The screen recorder for creative professionals. Built with precision and care to help you share your best work.
             </p>
+            <div className="flex items-center gap-4">
+              {["Twitter", "GitHub", "Discord"].map((social) => (
+                <a
+                  key={social}
+                  href="#"
+                  className="text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {social}
+                </a>
+              ))}
+            </div>
           </div>
-          
-          <div>
-            <h4 className="font-semibold mb-4">Product</h4>
-            <ul className="space-y-3 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground">Features</a></li>
-              <li><a href="#" className="hover:text-foreground">Pricing</a></li>
-              <li><a href="#" className="hover:text-foreground">Download</a></li>
-              <li><a href="#" className="hover:text-foreground">Changelog</a></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 className="font-semibold mb-4">Resources</h4>
-            <ul className="space-y-3 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground">Blog</a></li>
-              <li><a href="#" className="hover:text-foreground">Help Center</a></li>
-              <li><a href="#" className="hover:text-foreground">Community</a></li>
-              <li><a href="#" className="hover:text-foreground">Contact</a></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 className="font-semibold mb-4">Company</h4>
-            <ul className="space-y-3 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground">About</a></li>
-              <li><a href="#" className="hover:text-foreground">Careers</a></li>
-              <li><a href="#" className="hover:text-foreground">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-foreground">Terms of Service</a></li>
-            </ul>
-          </div>
+
+          {Object.entries(links).map(([section, items]) => (
+            <div key={section}>
+              <h4 className="font-semibold mb-5 text-sm text-foreground">{section}</h4>
+              <ul className="space-y-3 text-sm text-muted-foreground">
+                {items.map((item) => (
+                  <li key={item}>
+                    <a href="#" className="hover:text-foreground transition-colors">
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-        
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+
+        <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <p>© {new Date().getFullYear()} ScreenFlow Inc. All rights reserved.</p>
-          <div className="flex items-center gap-4">
-            <a href="#" className="hover:text-foreground">Twitter</a>
-            <a href="#" className="hover:text-foreground">GitHub</a>
-            <a href="#" className="hover:text-foreground">Discord</a>
-          </div>
+          <p className="text-xs">
+            Designed with care. Built to last.
+          </p>
         </div>
       </div>
     </footer>

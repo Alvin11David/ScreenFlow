@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { motion, useScroll } from "framer-motion";
-import { Menu, X, Command, Sun, Moon } from "lucide-react";
+import { motion } from "framer-motion";
+import { Menu, Command, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useTheme } from "@/components/ThemeProvider";
@@ -29,7 +29,7 @@ export function Navbar() {
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-white/10 shadow-sm"
+          ? "bg-background/80 backdrop-blur-md border-b border-border shadow-sm"
           : "bg-transparent"
       }`}
       initial={{ y: -100 }}
@@ -41,7 +41,7 @@ export function Navbar() {
           <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary to-cyan-400 flex items-center justify-center text-white font-bold text-xl group-hover:scale-105 transition-transform">
             S
           </div>
-          <span className="font-bold text-xl tracking-tight">ScreenFlow</span>
+          <span className="font-bold text-xl tracking-tight text-foreground">ScreenFlow</span>
         </Link>
 
         {/* Desktop Nav */}
@@ -57,39 +57,55 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-3">
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="w-9 h-9 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors"
+            data-testid="button-theme-toggle"
+            className="w-9 h-9 rounded-full flex items-center justify-center hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
             aria-label="Toggle theme"
           >
             {theme === "dark" ? (
-              <Sun className="w-4 h-4 text-muted-foreground hover:text-foreground" />
+              <Sun className="w-4 h-4" />
             ) : (
-              <Moon className="w-4 h-4 text-muted-foreground hover:text-foreground" />
+              <Moon className="w-4 h-4" />
             )}
           </button>
-          <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-muted-foreground">
+          <div className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted border border-border text-xs text-muted-foreground cursor-pointer hover:text-foreground transition-colors">
             <Command className="w-3 h-3" />
             <span>K</span>
           </div>
-          <Button variant="ghost" className="text-sm font-medium">
+          <Button
+            variant="ghost"
+            data-testid="button-login"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted"
+          >
             Log in
           </Button>
-          <Button className="bg-white text-black hover:bg-white/90 rounded-full px-6">
+          <Button
+            data-testid="button-download-nav"
+            className="bg-foreground text-background hover:bg-foreground/90 rounded-full px-6"
+          >
             Download
           </Button>
         </div>
 
         {/* Mobile Nav */}
-        <div className="md:hidden flex items-center gap-4">
+        <div className="md:hidden flex items-center gap-2">
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            data-testid="button-theme-toggle-mobile"
+            className="w-9 h-9 rounded-full flex items-center justify-center hover:bg-muted transition-colors text-muted-foreground"
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          </button>
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" data-testid="button-mobile-menu">
                 <Menu className="w-6 h-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] bg-background/95 backdrop-blur-xl border-white/10">
+            <SheetContent side="right" className="w-[300px] bg-background/95 backdrop-blur-xl border-border">
               <div className="flex flex-col gap-8 mt-8">
                 <nav className="flex flex-col gap-4">
                   {navLinks.map((link) => (
@@ -102,11 +118,11 @@ export function Navbar() {
                     </a>
                   ))}
                 </nav>
-                <div className="flex flex-col gap-4">
-                  <Button variant="outline" className="w-full justify-center">
+                <div className="flex flex-col gap-3">
+                  <Button variant="outline" className="w-full justify-center border-border">
                     Log in
                   </Button>
-                  <Button className="w-full justify-center bg-white text-black hover:bg-white/90">
+                  <Button className="w-full justify-center bg-foreground text-background hover:bg-foreground/90">
                     Download for free
                   </Button>
                 </div>

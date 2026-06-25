@@ -1,40 +1,131 @@
 import { motion } from "framer-motion";
-import { Download, Monitor, Apple } from "lucide-react";
+import { Monitor, Apple, Terminal, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
+const platforms = [
+  {
+    icon: Apple,
+    label: "Download for Mac",
+    sub: "macOS 11.0+, Universal",
+    primary: true,
+    testId: "button-download-mac-cta",
+  },
+  {
+    icon: Monitor,
+    label: "Download for Windows",
+    sub: "Windows 10+, 64-bit",
+    primary: false,
+    testId: "button-download-windows",
+  },
+  {
+    icon: Terminal,
+    label: "Download for Linux",
+    sub: "Debian, Ubuntu, Arch",
+    primary: false,
+    testId: "button-download-linux",
+  },
+];
 
 export function DownloadSection() {
   return (
     <section className="py-32 relative overflow-hidden">
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute left-0 bottom-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
-      
-      <div className="container mx-auto px-4 relative z-10 text-center">
+      {/* Background blobs */}
+      <div className="absolute right-1/4 top-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute left-1/4 bottom-0 w-[500px] h-[500px] bg-primary/15 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.97 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto rounded-3xl border border-white/10 bg-white/5 p-12 md:p-20 backdrop-blur-xl"
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-5xl mx-auto rounded-3xl border border-border bg-card/80 backdrop-blur-xl overflow-hidden"
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">Ready to flow?</h2>
-          <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
-            Join the creative professionals who have already made ScreenFlow their default recording tool. Free forever for basic use.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button size="lg" className="rounded-full px-8 h-14 text-base bg-white text-black hover:bg-white/90 gap-2">
-              <Apple className="w-5 h-5" />
-              Download for Mac
-            </Button>
-            <Button size="lg" variant="outline" className="rounded-full px-8 h-14 text-base border-white/10 hover:bg-white/5 gap-2 bg-transparent">
-              <Monitor className="w-5 h-5" />
-              Download for Windows
-            </Button>
+          {/* Top gradient bar */}
+          <div className="h-1 w-full bg-gradient-to-r from-primary via-cyan-400 to-primary" />
+
+          <div className="p-10 md:p-16 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold mb-8 uppercase tracking-wide"
+            >
+              Free forever for basic use
+            </motion.div>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl md:text-6xl font-bold mb-6 text-foreground"
+            >
+              Ready to flow?
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed"
+            >
+              Join the creative professionals who have already made ScreenFlow their default recording tool.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="flex flex-col sm:flex-row justify-center gap-4 mb-10"
+            >
+              {platforms.map((p) => {
+                const Icon = p.icon;
+                return (
+                  <Button
+                    key={p.label}
+                    size="lg"
+                    data-testid={p.testId}
+                    className={`rounded-full px-7 h-14 text-sm font-semibold gap-2.5 flex flex-col items-center justify-center h-auto py-3 ${
+                      p.primary
+                        ? "bg-foreground text-background hover:bg-foreground/90"
+                        : "bg-muted border border-border hover:bg-muted/80 text-foreground"
+                    }`}
+                  >
+                    <span className="flex items-center gap-2">
+                      <Icon className="w-4 h-4" />
+                      {p.label}
+                    </span>
+                    <span className={`text-xs font-normal ${p.primary ? "opacity-60" : "text-muted-foreground"}`}>
+                      {p.sub}
+                    </span>
+                  </Button>
+                );
+              })}
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-muted-foreground"
+            >
+              <span>No credit card required</span>
+              <span className="hidden sm:block w-px h-4 bg-border" />
+              <span>14-day free trial on Pro</span>
+              <span className="hidden sm:block w-px h-4 bg-border" />
+              <a
+                href="#"
+                data-testid="link-release-notes"
+                className="flex items-center gap-1 text-primary hover:text-primary/80 transition-colors"
+              >
+                Release notes <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+            </motion.div>
           </div>
-          
-          <p className="mt-8 text-sm text-muted-foreground">
-            Requires macOS 11.0+ or Windows 10+. <a href="#" className="underline hover:text-white transition-colors">See full requirements</a>.
-          </p>
         </motion.div>
       </div>
     </section>
