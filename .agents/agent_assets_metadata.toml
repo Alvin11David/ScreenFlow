@@ -1,0 +1,62 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "L2xUI6xSp-aHy44Khe5X8"
+uri = "file://artifacts/screenflow/public/images/hero-mockup.png"
+type = "image"
+title = "Hero mockup browser"
+
+[[generated]]
+id = "2nGGXPzPt15sb_J-WzACh"
+uri = "file://artifacts/screenflow/public/images/feature-1.png"
+type = "image"
+title = "Feature 1 illustration"
+
+[[generated]]
+id = "5Cr73r9bdGdm7c-ggNhs-"
+uri = "file://artifacts/screenflow/public/images/feature-2.png"
+type = "image"
+title = "Feature 2 illustration"
+
+[[generated]]
+id = "LOuqD3JHV9z3dT-RPI86V"
+uri = "file://artifacts/screenflow/public/images/feature-3.png"
+type = "image"
+title = "Feature 3 illustration"
+
+[[generated]]
+id = "vB1-Rv0BMGDzQM8SqGCB5"
+uri = "file://artifacts/screenflow/public/images/blog-1.png"
+type = "image"
+title = "Blog 1 header"
+
+[[generated]]
+id = "CXurXUjvjRrYRM0Ri--Pd"
+uri = "file://artifacts/screenflow/public/images/avatar-1.png"
+type = "image"
+title = "Avatar 1"
+
+[[generated]]
+id = "ptcbkw1B7LZJN-SKfXfmO"
+uri = "file://artifacts/screenflow/public/images/avatar-2.png"
+type = "image"
+title = "Avatar 2"
+
+[[generated]]
+id = "dVJafRM7CYBE8sVBC77Ji"
+uri = "file://artifacts/screenflow/public/images/avatar-3.png"
+type = "image"
+title = "Avatar 3"
+
+[[generated]]
+id = "3pVeK3ounT8b56Z0IkuWr"
+uri = "file://artifacts/screenflow/public/images/blog-2.png"
+type = "image"
+title = "Blog 2 header"
+
+[[generated]]
+id = "3a765BSA-xpJfjuPw5BaZ"
+uri = "file://artifacts/screenflow/public/images/blog-3.png"
+type = "image"
+title = "Blog 3 header"

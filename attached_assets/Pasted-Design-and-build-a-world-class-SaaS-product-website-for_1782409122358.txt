@@ -1,0 +1,199 @@
+Design and build a world-class SaaS product website for a modern screen recording and productivity software, inspired by DemoShare, Linear, Framer, Raycast, Stripe, Notion, Arc Browser, and Apple.
+
+The website must feel premium, futuristic, trustworthy, and beautifully crafted by elite product designers.
+
+DESIGN PHILOSOPHY:
+- Minimal but luxurious
+- Apple-level attention to spacing and typography
+- Smooth micro-interactions everywhere
+- Soft glassmorphism effects
+- Modern gradients
+- Clean visual hierarchy
+- Professional SaaS aesthetics
+- Perfect responsiveness across desktop, tablet, and mobile
+- Dark mode and light mode support
+- Accessibility-first design
+
+COLOR SYSTEM:
+- Elegant neutral backgrounds
+- Premium accent gradients
+- Soft shadows
+- Layered cards
+- Frosted glass components
+- Modern pastel highlights
+
+TYPOGRAPHY:
+- Large hero typography
+- Clean sans-serif fonts (Inter, Geist, SF Pro, or Satoshi)
+- Perfect font scaling
+- Strong visual hierarchy
+
+ANIMATIONS:
+- Framer Motion-style animations
+- Smooth page transitions
+- Scroll-triggered reveals
+- Hover elevations
+- Magnetic buttons
+- Floating elements
+- Parallax sections
+- Smooth loading skeletons
+- Animated counters
+- Interactive product previews
+
+WEBSITE STRUCTURE:
+
+1. NAVIGATION BAR
+- Sticky glassmorphism navbar
+- Animated logo
+- Features dropdown
+- Pricing
+- Testimonials
+- Documentation
+- Blog
+- Download button
+- Login button
+- Theme switcher
+- Language selector
+
+2. HERO SECTION
+- Massive headline
+- Powerful value proposition
+- Primary CTA button
+- Secondary CTA
+- Product preview video
+- Floating UI mockups
+- Background gradients
+- Trust badges
+- User statistics
+- Company logos
+
+3. SOCIAL PROOF
+- User count
+- Downloads
+- Reviews
+- Star ratings
+- Customer logos
+- Press mentions
+
+4. FEATURES SECTION
+Interactive feature cards with:
+- Large illustrations
+- Hover animations
+- Beautiful icons
+- Progressive disclosure
+- Glassmorphism effects
+
+Features include:
+- Screen recording
+- Webcam recording
+- AI editing tools
+- Instant sharing
+- Cloud storage
+- Collaboration
+- Analytics
+- Cross-platform support
+
+5. PRODUCT SHOWCASE
+- Interactive demo area
+- Video previews
+- Device mockups
+- Browser window animations
+- Floating screenshots
+- Before/after comparisons
+
+6. TESTIMONIALS
+- Modern card carousel
+- Profile pictures
+- Video testimonials
+- Star ratings
+- Animated transitions
+
+7. PRICING SECTION
+- Monthly/yearly toggle
+- Premium pricing cards
+- Feature comparison
+- Popular plan highlights
+- Glassmorphism design
+- Smooth hover effects
+
+8. FAQ SECTION
+- Beautiful accordion animations
+- Clean typography
+- Smart categorization
+
+9. BLOG PREVIEW
+- Featured articles
+- Modern content cards
+- Author sections
+- Category filters
+
+10. DOWNLOAD SECTION
+- Windows download
+- Mac download
+- Linux support
+- System requirements
+- Version history
+- Release notes
+
+11. FOOTER
+Comprehensive modern footer:
+- Product links
+- Resources
+- Company
+- Legal pages
+- Social media
+- Newsletter signup
+- Community links
+- Support center
+
+MODERN WEBSITE FEATURES TO INCLUDE:
+
+✓ Dark Mode
+✓ Glassmorphism
+✓ Smooth Scrolling
+✓ Framer Motion Animations
+✓ Lazy Loading
+✓ Skeleton Loaders
+✓ SEO Optimization
+✓ Open Graph Support
+✓ Structured Data
+✓ Analytics Integration
+✓ Cookie Consent
+✓ Newsletter Integration
+✓ Live Chat Widget
+✓ Documentation Portal
+✓ Search Functionality
+✓ Command Palette
+✓ Mobile Navigation Drawer
+✓ Progressive Web App Support
+✓ Multi-language Support
+✓ Accessibility Compliance
+✓ Performance Optimization
+✓ Modern Loading States
+✓ Interactive Background Effects
+✓ Animated Gradients
+✓ Scroll Progress Indicators
+✓ Floating Action Buttons
+✓ Back-to-top Button
+✓ Custom Cursors
+✓ Keyboard Shortcuts
+✓ User Authentication Pages
+✓ Dashboard Preview
+✓ Download Analytics
+✓ Community Section
+
+TECH STACK:
+- Next.js 15
+- React 19
+- TypeScript
+- TailwindCSS
+- Framer Motion
+- ShadCN UI
+- Lucide Icons
+- Radix UI
+- Server Components
+- Modern Design Patterns
+
+The final result should feel like it was designed by the world's best UI/UX team, combining the elegance of Apple, the productivity focus of Linear, the polish of Stripe, and the modern aesthetics of Framer.
+
+No generic templates. Every section should feel handcrafted, premium, and worthy of a billion-dollar SaaS product.
