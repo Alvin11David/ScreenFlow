@@ -143,7 +143,7 @@ export function Pricing() {
               className={`relative p-8 rounded-3xl border transition-all duration-300 ${
                 plan.popular
                   ? "border-primary bg-gradient-to-b from-primary/10 to-primary/5 shadow-xl shadow-primary/10"
-                  : "border-border bg-card hover:border-primary/30"
+                  : "border-border bg-card hover:border-primary/30 elevated-card"
               }`}
             >
               {plan.popular && (

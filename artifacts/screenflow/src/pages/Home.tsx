@@ -29,7 +29,7 @@ export default function Home() {
       {/* Animated gradient mesh background */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
         <div
-          className="orb-1 absolute rounded-full"
+          className="orb-1 absolute rounded-full opacity-40 dark:opacity-100"
           style={{
             top: "-15%",
             left: "-5%",
@@ -40,7 +40,7 @@ export default function Home() {
           }}
         />
         <div
-          className="orb-2 absolute rounded-full"
+          className="orb-2 absolute rounded-full opacity-40 dark:opacity-100"
           style={{
             top: "35%",
             right: "-10%",
@@ -51,7 +51,7 @@ export default function Home() {
           }}
         />
         <div
-          className="orb-3 absolute rounded-full"
+          className="orb-3 absolute rounded-full opacity-40 dark:opacity-100"
           style={{
             bottom: "10%",
             left: "25%",

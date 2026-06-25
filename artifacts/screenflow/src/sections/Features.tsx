@@ -103,7 +103,7 @@ function FeatureCard({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className={`group relative rounded-3xl border border-border bg-gradient-to-br ${feature.color} bg-card p-8 md:p-10 overflow-hidden hover:border-primary/30 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5`}
+        className={`group relative rounded-3xl border border-border bg-gradient-to-br ${feature.color} bg-card p-8 md:p-10 overflow-hidden hover:border-primary/30 transition-all duration-500 elevated-card hover:shadow-xl hover:shadow-primary/5`}
       >
         {/* Animated gradient blob */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
@@ -140,7 +140,7 @@ function FeatureCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className={`group relative rounded-2xl border border-border bg-card p-6 overflow-hidden hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 cursor-default`}
+      className={`group relative rounded-2xl border border-border bg-card p-6 overflow-hidden hover:border-primary/30 transition-all duration-300 elevated-card hover:shadow-lg hover:shadow-primary/5 cursor-default`}
     >
       <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
       <div className={`inline-flex w-10 h-10 rounded-xl ${feature.bg} items-center justify-center mb-4`}>

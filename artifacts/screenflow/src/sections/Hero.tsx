@@ -270,15 +270,15 @@ export function Hero() {
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             className="absolute -left-4 md:-left-10 top-1/3 z-20 hidden sm:block"
           >
-            <div className="backdrop-blur-xl rounded-2xl p-3.5 shadow-xl w-44" style={{ background: "rgba(13,15,26,0.85)", border: "1px solid rgba(255,255,255,0.1)" }}>
+            <div className="backdrop-blur-xl rounded-2xl p-3.5 shadow-xl w-44 bg-card/95 border border-border">
               <div className="flex items-center gap-2 mb-1.5">
                 <span className="relative flex h-2.5 w-2.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500" />
                 </span>
-                <span className="text-xs font-semibold text-white">REC 00:12:47</span>
+                <span className="text-xs font-semibold text-foreground">REC 00:12:47</span>
               </div>
-              <p className="text-xs text-white/40">4K · 60fps · 0% CPU drop</p>
+              <p className="text-xs text-muted-foreground">4K · 60fps · 0% CPU drop</p>
             </div>
           </motion.div>
 
@@ -287,10 +287,10 @@ export function Hero() {
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             className="absolute -right-4 md:-right-10 top-1/4 z-20 hidden sm:block"
           >
-            <div className="backdrop-blur-xl rounded-2xl p-3.5 shadow-xl w-48" style={{ background: "rgba(13,15,26,0.85)", border: "1px solid rgba(255,255,255,0.1)" }}>
-              <p className="text-xs font-semibold text-white/50 mb-1.5">AI silences removed</p>
+            <div className="backdrop-blur-xl rounded-2xl p-3.5 shadow-xl w-48 bg-card/95 border border-border">
+              <p className="text-xs font-semibold text-muted-foreground mb-1.5">AI silences removed</p>
               <div className="flex items-center gap-2">
-                <div className="h-1.5 flex-1 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.08)" }}>
+                <div className="h-1.5 flex-1 rounded-full overflow-hidden bg-muted/80">
                   <motion.div
                     className="h-full rounded-full"
                     style={{ background: "linear-gradient(to right, #7c3aed, #0ea5e9)" }}
@@ -299,7 +299,7 @@ export function Hero() {
                     transition={{ duration: 2, delay: 1.5 }}
                   />
                 </div>
-                <span className="text-xs font-bold text-violet-400">78%</span>
+                <span className="text-xs font-bold text-violet-500 dark:text-violet-400">78%</span>
               </div>
             </div>
           </motion.div>
@@ -309,13 +309,13 @@ export function Hero() {
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
             className="absolute -right-4 md:-right-8 bottom-1/4 z-20 hidden sm:block"
           >
-            <div className="backdrop-blur-xl rounded-2xl p-3.5 shadow-xl" style={{ background: "rgba(13,15,26,0.85)", border: "1px solid rgba(255,255,255,0.1)" }}>
-              <p className="text-xs text-white/40 mb-1">Link copied</p>
+            <div className="backdrop-blur-xl rounded-2xl p-3.5 shadow-xl bg-card/95 border border-border">
+              <p className="text-xs text-muted-foreground mb-1">Link copied</p>
               <div className="flex items-center gap-1.5">
-                <div className="w-4 h-4 rounded-full flex items-center justify-center" style={{ background: "rgba(34,197,94,0.15)" }}>
-                  <div className="w-2 h-2 rounded-full bg-green-400" />
+                <div className="w-4 h-4 rounded-full flex items-center justify-center bg-green-500/15">
+                  <div className="w-2 h-2 rounded-full bg-green-500" />
                 </div>
-                <span className="text-xs font-semibold text-white">screenflow.io/r/xK9p</span>
+                <span className="text-xs font-semibold text-foreground">screenflow.io/r/xK9p</span>
               </div>
             </div>
           </motion.div>

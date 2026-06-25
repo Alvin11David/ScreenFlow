@@ -95,46 +95,81 @@ export function ProductShowcase() {
           {/* Main mockup */}
           <motion.div
             style={{ y, rotateX }}
-            className="relative rounded-2xl border border-border dark:border-white/10 shadow-2xl shadow-primary/10 bg-card overflow-hidden"
+            className="relative rounded-2xl border border-border shadow-2xl shadow-primary/10 overflow-hidden"
           >
-            {/* Toolbar */}
-            <div className="h-10 bg-muted/50 dark:bg-white/5 flex items-center px-4 gap-2 border-b border-border dark:border-white/10">
-              <div className="w-3 h-3 rounded-full bg-red-400/80" />
-              <div className="w-3 h-3 rounded-full bg-yellow-400/80" />
-              <div className="w-3 h-3 rounded-full bg-green-400/80" />
-              <div className="flex-1 mx-6 h-5 rounded bg-muted/80 dark:bg-white/5 flex items-center px-3">
-                <span className="text-[10px] text-muted-foreground">app.screenflow.io/record</span>
+            {/* CSS video share page mockup — always dark, like a real app window */}
+            <div style={{ background: "#0d0f1a" }} className="w-full">
+              {/* Title bar */}
+              <div style={{ background: "#13151f", borderBottom: "1px solid rgba(255,255,255,0.06)" }} className="flex items-center px-4 h-10 gap-3">
+                <div className="flex gap-1.5 flex-shrink-0">
+                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                </div>
+                <div style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.06)" }} className="flex-1 rounded h-5 mx-4 flex items-center px-3">
+                  <span className="text-[10px]" style={{ color: "rgba(255,255,255,0.3)" }}>screenflow.io/r/xK9p</span>
+                </div>
+                <div style={{ background: "rgba(124,58,237,0.15)", border: "1px solid rgba(124,58,237,0.25)" }} className="flex items-center gap-1.5 px-2.5 py-1 rounded-md flex-shrink-0">
+                  <span className="text-[10px] font-semibold" style={{ color: "#a78bfa" }}>Share</span>
+                </div>
               </div>
-              <div className="flex items-center gap-1.5 px-2 py-1 rounded bg-red-500/10 border border-red-500/20">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-                </span>
-                <span className="text-[10px] font-semibold text-red-500">REC</span>
+
+              {/* Video player area */}
+              <div style={{ background: "#000", height: 220, position: "relative", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(124,58,237,0.35) 0%, rgba(14,165,233,0.25) 60%, rgba(236,72,153,0.15) 100%)" }} />
+                <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle at 30% 40%, rgba(124,58,237,0.2) 0%, transparent 50%), radial-gradient(circle at 70% 70%, rgba(14,165,233,0.15) 0%, transparent 50%)" }} />
+                {/* Play button */}
+                <div style={{ position: "relative", zIndex: 2, width: 56, height: 56, borderRadius: "50%", background: "rgba(255,255,255,0.12)", backdropFilter: "blur(8px)", border: "1.5px solid rgba(255,255,255,0.25)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
+                  <div style={{ width: 0, height: 0, marginLeft: 5, borderTop: "10px solid transparent", borderBottom: "10px solid transparent", borderLeft: "16px solid rgba(255,255,255,0.9)" }} />
+                </div>
+                {/* Duration badge */}
+                <div style={{ position: "absolute", bottom: 12, right: 14, background: "rgba(0,0,0,0.55)", borderRadius: 4, padding: "2px 6px", fontSize: 11, fontFamily: "monospace", color: "rgba(255,255,255,0.85)", zIndex: 2 }}>2:47</div>
+                {/* Chapter markers */}
+                <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 3, background: "rgba(255,255,255,0.08)", zIndex: 2 }}>
+                  <motion.div initial={{ width: "0%" }} whileInView={{ width: "0%" }} viewport={{ once: true }} style={{ height: "100%", background: "linear-gradient(to right, #7c3aed, #0ea5e9)", borderRadius: 2 }} />
+                </div>
               </div>
-            </div>
 
-            <img
-              src="/images/hero-mockup.png"
-              alt="ScreenFlow in action"
-              className="w-full h-auto opacity-90 dark:opacity-80"
-            />
+              {/* Info bar */}
+              <div style={{ padding: "14px 20px 0", display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
+                <div>
+                  <div style={{ fontSize: 14, fontWeight: 600, color: "rgba(255,255,255,0.88)", marginBottom: 3 }}>ScreenFlow Product Demo v3</div>
+                  <div style={{ fontSize: 11, color: "rgba(255,255,255,0.3)" }}>Recorded today · 2:47</div>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 3, fontSize: 11, color: "rgba(255,255,255,0.35)" }}>
+                  <span>👁</span><span>247 views</span>
+                </div>
+              </div>
 
-            {/* Bottom timeline bar */}
-            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-card to-transparent flex items-end pb-3 px-6">
-              <div className="w-full h-2 rounded-full bg-muted/80 dark:bg-white/10 overflow-hidden">
-                <motion.div
-                  className="h-full bg-gradient-to-r from-primary to-cyan-400 rounded-full"
-                  initial={{ width: "0%" }}
-                  whileInView={{ width: "67%" }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 2, delay: 0.5, ease: "easeOut" }}
-                />
+              {/* Reactions + comments */}
+              <div style={{ padding: "12px 20px 16px", display: "flex", flexDirection: "column", gap: 12 }}>
+                <div style={{ display: "flex", gap: 6 }}>
+                  {[{ emoji: "👍", count: 12 }, { emoji: "❤️", count: 8 }, { emoji: "🔥", count: 5 }].map((r) => (
+                    <div key={r.emoji} style={{ display: "flex", alignItems: "center", gap: 4, padding: "3px 10px", borderRadius: 20, background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)", fontSize: 11 }}>
+                      <span>{r.emoji}</span>
+                      <span style={{ color: "rgba(255,255,255,0.5)" }}>{r.count}</span>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  {[
+                    { initials: "AK", color: "#7c3aed", text: "Great walkthrough! 🙌", time: "2m ago" },
+                    { initials: "MJ", color: "#0ea5e9", text: "Can you share the source repo?", time: "5m ago" },
+                  ].map((c) => (
+                    <div key={c.initials} style={{ display: "flex", alignItems: "flex-start", gap: 9 }}>
+                      <div style={{ width: 26, height: 26, borderRadius: "50%", background: c.color + "30", border: `1.5px solid ${c.color}55`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, color: c.color, fontWeight: 700, flexShrink: 0 }}>{c.initials}</div>
+                      <div>
+                        <div style={{ fontSize: 12, color: "rgba(255,255,255,0.65)", lineHeight: 1.4 }}>{c.text}</div>
+                        <div style={{ fontSize: 10, color: "rgba(255,255,255,0.25)", marginTop: 2 }}>{c.time}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
             {/* Overlay gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent pointer-events-none" />
           </motion.div>
 
           {/* Bottom glow */}

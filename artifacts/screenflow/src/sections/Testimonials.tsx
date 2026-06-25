@@ -107,7 +107,7 @@ export function Testimonials() {
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-3 relative p-8 md:p-10 rounded-3xl border border-border bg-card overflow-hidden group hover:border-primary/30 transition-all duration-300"
+            className="lg:col-span-3 relative p-8 md:p-10 rounded-3xl border border-border bg-card overflow-hidden group hover:border-primary/30 transition-all duration-300 elevated-card"
           >
             <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-primary/15 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
@@ -140,7 +140,7 @@ export function Testimonials() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.15 + idx * 0.1 }}
-                className="p-6 rounded-2xl border border-border bg-card hover:border-primary/30 transition-all duration-300 group flex-1"
+                className="p-6 rounded-2xl border border-border bg-card hover:border-primary/30 transition-all duration-300 group flex-1 elevated-card"
               >
                 <Stars count={t.rating} />
                 <p className="text-base my-4 leading-relaxed text-muted-foreground">
@@ -171,7 +171,7 @@ export function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 + idx * 0.1 }}
-              className="p-6 rounded-2xl border border-border bg-card hover:border-primary/30 transition-all duration-300"
+              className="p-6 rounded-2xl border border-border bg-card hover:border-primary/30 transition-all duration-300 elevated-card"
             >
               <Stars count={t.rating} />
               <p className="text-base my-4 leading-relaxed text-muted-foreground">
