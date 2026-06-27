@@ -75,13 +75,6 @@ export function Navbar() {
             <span>K</span>
           </div>
           <Button
-            variant="ghost"
-            data-testid="button-login"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted"
-          >
-            Log in
-          </Button>
-          <Button
             data-testid="button-download-nav"
             onClick={() => {
               window.open("https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing", "_blank", "noopener,noreferrer");
@@ -123,9 +116,6 @@ export function Navbar() {
                   ))}
                 </nav>
                 <div className="flex flex-col gap-3">
-                  <Button variant="outline" className="w-full justify-center border-border">
-                    Log in
-                  </Button>
                   <Button
                     onClick={() => {
                       window.open("https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing", "_blank", "noopener,noreferrer");
