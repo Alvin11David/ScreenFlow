@@ -1,30 +1,33 @@
 import { motion } from "framer-motion";
 import { Monitor, Apple, Terminal, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { getOS } from "@/lib/utils";
 
-const platforms = [
+const allPlatforms = [
   {
+    os: "mac",
     icon: Apple,
     label: "Download for Mac",
     sub: "macOS 11.0+, Universal",
-    primary: true,
     testId: "button-download-mac-cta",
   },
   {
+    os: "windows",
     icon: Monitor,
     label: "Download for Windows",
     sub: "Windows 10+, 64-bit",
-    primary: false,
     testId: "button-download-windows",
   },
   {
+    os: "linux",
     icon: Terminal,
     label: "Download for Linux",
     sub: "Debian, Ubuntu, Arch",
-    primary: false,
     testId: "button-download-linux",
   },
 ];
+
+const platforms = allPlatforms.toSorted((a) => (a.os === getOS() ? -1 : 0));
 
 export function DownloadSection() {
   return (
