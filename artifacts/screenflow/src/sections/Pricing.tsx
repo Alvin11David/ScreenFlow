@@ -5,8 +5,6 @@ import { Button } from "@/components/ui/button";
 const plans = [
   {
     name: "Free",
-    monthlyPrice: 0,
-    yearlyPrice: 0,
     description: "Everything included, completely free",
     features: [
       "Unlimited recording time",
@@ -92,7 +90,6 @@ export function Pricing() {
                   <span className="text-5xl font-bold text-foreground">$0</span>
                   <span className="text-muted-foreground mb-1.5">/mo</span>
                 </div>
-                
               </div>
 
               <Button
@@ -124,8 +121,6 @@ export function Pricing() {
             </motion.div>
           ))}
         </div>
-
-        
       </div>
     </section>
   );
