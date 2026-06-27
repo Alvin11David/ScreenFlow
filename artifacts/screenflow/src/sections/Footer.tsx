@@ -38,7 +38,12 @@ export function Footer() {
               <ul className="space-y-3 text-sm text-muted-foreground">
                 {items.map((item) => (
                   <li key={item}>
-                    <a href="#" className="hover:text-foreground transition-colors">
+                    <a
+                      href={item === "Download" ? "https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing" : "#"}
+                      target={item === "Download" ? "_blank" : undefined}
+                      rel={item === "Download" ? "noopener noreferrer" : undefined}
+                      className="hover:text-foreground transition-colors"
+                    >
                       {item}
                     </a>
                   </li>

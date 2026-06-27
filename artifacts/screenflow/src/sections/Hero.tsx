@@ -237,6 +237,7 @@ export function Hero() {
             <Button
               size="lg"
               data-testid="button-download-mac"
+              onClick={() => window.open("https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing", "_blank", "noopener,noreferrer")}
               className="btn-glow rounded-full px-8 h-14 text-base gap-2 w-full sm:w-auto bg-foreground text-background hover:bg-foreground/90 transition-all duration-300"
             >
               <Download className="w-5 h-5" />

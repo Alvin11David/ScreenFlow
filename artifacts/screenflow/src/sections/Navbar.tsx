@@ -83,6 +83,7 @@ export function Navbar() {
           </Button>
           <Button
             data-testid="button-download-nav"
+            onClick={() => window.open("https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing", "_blank", "noopener,noreferrer")}
             className="bg-foreground text-background hover:bg-foreground/90 rounded-full px-6"
           >
             Download
@@ -122,7 +123,10 @@ export function Navbar() {
                   <Button variant="outline" className="w-full justify-center border-border">
                     Log in
                   </Button>
-                  <Button className="w-full justify-center bg-foreground text-background hover:bg-foreground/90">
+                  <Button
+                    onClick={() => window.open("https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing", "_blank", "noopener,noreferrer")}
+                    className="w-full justify-center bg-foreground text-background hover:bg-foreground/90"
+                  >
                     Download for free
                   </Button>
                 </div>
