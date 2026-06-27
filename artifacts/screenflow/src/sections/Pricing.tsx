@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Check, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -27,8 +26,6 @@ const plans = [
 ];
 
 export function Pricing() {
-  const [isYearly, setIsYearly] = useState(false);
-
   return (
     <section id="pricing" className="py-32 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/3 to-transparent pointer-events-none" />
@@ -58,55 +55,11 @@ export function Pricing() {
             transition={{ delay: 0.2 }}
             className="text-xl text-muted-foreground mb-10"
           >
-            Start for free, upgrade when you need more power.
-          </motion.p>
-
-          {/* Monthly / Yearly toggle */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="inline-flex items-center gap-3 p-1.5 rounded-full bg-muted border border-border"
-          >
-            <button
-              onClick={() => setIsYearly(false)}
-              data-testid="toggle-monthly"
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                !isYearly
-                  ? "bg-background text-foreground shadow-sm"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              Monthly
-            </button>
-            <button
-              onClick={() => setIsYearly(true)}
-              data-testid="toggle-yearly"
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-2 ${
-                isYearly
-                  ? "bg-background text-foreground shadow-sm"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              Yearly
-              <AnimatePresence>
-                {isYearly && (
-                  <motion.span
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    className="text-xs bg-green-500/15 text-green-600 dark:text-green-400 px-2 py-0.5 rounded-full font-semibold"
-                  >
-                    -33%
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </button>
-          </motion.div>
+            Completely free, no strings attached.
+            </motion.p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-1 gap-6 max-w-sm mx-auto">
           {plans.map((plan, idx) => (
             <motion.div
               key={plan.name}
@@ -136,29 +89,10 @@ export function Pricing() {
 
               <div className="mb-8">
                 <div className="flex items-end gap-1">
-                  <AnimatePresence mode="wait">
-                    <motion.span
-                      key={isYearly ? "yearly" : "monthly"}
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      transition={{ duration: 0.2 }}
-                      className="text-5xl font-bold text-foreground"
-                    >
-                      ${isYearly ? plan.yearlyPrice : plan.monthlyPrice}
-                    </motion.span>
-                  </AnimatePresence>
+                  <span className="text-5xl font-bold text-foreground">$0</span>
                   <span className="text-muted-foreground mb-1.5">/mo</span>
                 </div>
-                {isYearly && plan.monthlyPrice > 0 && (
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="text-xs text-muted-foreground mt-1"
-                  >
-                    Billed annually · ${plan.yearlyPrice * 12}/yr
-                  </motion.p>
-                )}
+                
               </div>
 
               <Button
@@ -191,14 +125,7 @@ export function Pricing() {
           ))}
         </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center text-sm text-muted-foreground mt-10"
-        >
-          All plans include a 14-day free trial. No credit card required.
-        </motion.p>
+        
       </div>
     </section>
   );
