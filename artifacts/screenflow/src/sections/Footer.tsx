@@ -42,6 +42,7 @@ export function Footer() {
                       href={item === "Download" ? "https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing" : "#"}
                       target={item === "Download" ? "_blank" : undefined}
                       rel={item === "Download" ? "noopener noreferrer" : undefined}
+                      onClick={item === "Download" ? (e) => { setTimeout(() => { window.location.href = "/thanks"; }, 100); } : undefined}
                       className="hover:text-foreground transition-colors"
                     >
                       {item}

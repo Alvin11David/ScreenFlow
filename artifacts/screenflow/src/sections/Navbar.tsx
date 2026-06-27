@@ -83,7 +83,10 @@ export function Navbar() {
           </Button>
           <Button
             data-testid="button-download-nav"
-            onClick={() => window.open("https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing", "_blank", "noopener,noreferrer")}
+            onClick={() => {
+              window.open("https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing", "_blank", "noopener,noreferrer");
+              window.location.href = "/thanks";
+            }}
             className="bg-foreground text-background hover:bg-foreground/90 rounded-full px-6"
           >
             Download
@@ -124,7 +127,10 @@ export function Navbar() {
                     Log in
                   </Button>
                   <Button
-                    onClick={() => window.open("https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing", "_blank", "noopener,noreferrer")}
+                    onClick={() => {
+                      window.open("https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing", "_blank", "noopener,noreferrer");
+                      window.location.href = "/thanks";
+                    }}
                     className="w-full justify-center bg-foreground text-background hover:bg-foreground/90"
                   >
                     Download for free

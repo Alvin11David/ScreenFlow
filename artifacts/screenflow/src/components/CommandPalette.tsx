@@ -35,7 +35,10 @@ export function CommandPalette() {
             <Command.Group heading="Suggestions" className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
               <Command.Item
                 className="flex cursor-pointer items-center rounded-sm px-2 py-2.5 text-sm hover:bg-white/10 aria-selected:bg-white/10 transition-colors"
-                onSelect={() => window.open("https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing", "_blank", "noopener,noreferrer")}
+                onSelect={() => {
+                  window.open("https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing", "_blank", "noopener,noreferrer");
+                  window.location.href = "/thanks";
+                }}
               >
                 <Laptop className="mr-2 h-4 w-4" />
                 <span>Download ScreenFlow</span>

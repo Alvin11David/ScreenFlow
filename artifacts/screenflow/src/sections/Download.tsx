@@ -88,7 +88,10 @@ export function DownloadSection() {
                     key={p.label}
                     size="lg"
                     data-testid={p.testId}
-                    onClick={() => window.open("https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing", "_blank", "noopener,noreferrer")}
+                    onClick={() => {
+                      window.open("https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing", "_blank", "noopener,noreferrer");
+                      window.location.href = "/thanks";
+                    }}
                     className={`rounded-full px-7 h-14 text-sm font-semibold gap-2.5 flex flex-col items-center justify-center h-auto py-3 ${
                       p.primary
                         ? "bg-foreground text-background hover:bg-foreground/90"
