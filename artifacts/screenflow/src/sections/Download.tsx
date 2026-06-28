@@ -125,7 +125,7 @@ export function DownloadSection() {
               <span>14-day free trial on Pro</span>
               <span className="hidden sm:block w-px h-4 bg-border" />
               <a
-                href="#"
+                href="/#"
                 data-testid="link-release-notes"
                 className="flex items-center gap-1 text-primary hover:text-primary/80 transition-colors"
               >

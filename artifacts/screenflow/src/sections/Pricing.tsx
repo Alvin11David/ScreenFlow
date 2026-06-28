@@ -5,21 +5,53 @@ import { Button } from "@/components/ui/button";
 const plans = [
   {
     name: "Free",
-    description: "Everything included, completely free",
+    description: "Everything you need to get started",
+    price: "$0",
+    period: "/mo",
     features: [
       "Unlimited recording time",
-      "4K resolution at 60fps",
+      "4K at 60fps",
       "No watermarks",
-      "Unlimited cloud storage",
-      "AI audio enhancement",
-      "Custom branding",
-      "Team workspaces",
-      "SSO & advanced security",
-      "Priority support",
-      "Usage analytics",
+      "Basic editing tools",
+      "Cloud sharing links",
+      "1 team workspace",
     ],
     cta: "Get started free",
+    popular: false,
+  },
+  {
+    name: "Pro",
+    description: "For professionals and power users",
+    price: "$12",
+    period: "/mo",
+    features: [
+      "Everything in Free",
+      "AI audio enhancement",
+      "Custom branding",
+      "Unlimited cloud storage",
+      "View analytics",
+      "Priority support",
+      "5 team workspaces",
+    ],
+    cta: "Start 14-day trial",
     popular: true,
+  },
+  {
+    name: "Team",
+    description: "For teams who need more",
+    price: "$29",
+    period: "/mo",
+    features: [
+      "Everything in Pro",
+      "Unlimited team workspaces",
+      "SSO & advanced security",
+      "Role-based access",
+      "Audit logs",
+      "Dedicated success manager",
+      "Custom integrations",
+    ],
+    cta: "Start 14-day trial",
+    popular: false,
   },
 ];
 
@@ -53,11 +85,11 @@ export function Pricing() {
             transition={{ delay: 0.2 }}
             className="text-xl text-muted-foreground mb-10"
           >
-            Completely free, no strings attached.
-            </motion.p>
+            Start free, upgrade when you need more.
+          </motion.p>
         </div>
 
-        <div className="grid md:grid-cols-1 gap-6 max-w-sm mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {plans.map((plan, idx) => (
             <motion.div
               key={plan.name}
@@ -87,8 +119,8 @@ export function Pricing() {
 
               <div className="mb-8">
                 <div className="flex items-end gap-1">
-                  <span className="text-5xl font-bold text-foreground">$0</span>
-                  <span className="text-muted-foreground mb-1.5">/mo</span>
+                  <span className="text-5xl font-bold text-foreground">{plan.price}</span>
+                  <span className="text-muted-foreground mb-1.5">{plan.period}</span>
                 </div>
               </div>
 
