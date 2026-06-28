@@ -28,7 +28,7 @@ router.get("/", requireAuth, async (req: AuthenticatedRequest, res) => {
 });
 
 router.post("/", requireAuth, async (req: AuthenticatedRequest, res) => {
-  const parsed = CreateVideoRequest.safeParse(req.body);
+  const parsed = CreateVideoBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: parsed.error.issues[0]?.message ?? "Invalid input" });
     return;
@@ -58,7 +58,7 @@ router.get("/:id", requireAuth, async (req: AuthenticatedRequest, res) => {
 });
 
 router.patch("/:id", requireAuth, async (req: AuthenticatedRequest, res) => {
-  const parsed = UpdateVideoRequest.safeParse(req.body);
+  const parsed = UpdateVideoBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: parsed.error.issues[0]?.message ?? "Invalid input" });
     return;
@@ -106,7 +106,7 @@ router.post("/:id/share", requireAuth, async (req: AuthenticatedRequest, res) =>
     return;
   }
 
-  const parsed = CreateShareRequest.safeParse(req.body);
+  const parsed = CreateShareLinkBody.safeParse(req.body);
   const shareToken = crypto.randomBytes(24).toString("hex");
 
   let expiresAt: Date | undefined;
@@ -130,7 +130,7 @@ router.get("/shared/:token", optionalAuth, async (req: AuthenticatedRequest, res
   const [share] = await db
     .select()
     .from(videoSharesTable)
-    .where(eq(videoSharesTable.shareToken, req.params.token))
+    .where(eq(videoSharesTable.shareToken, req.params.token as string))
     .limit(1);
 
   if (!share || (share.expiresAt && share.expiresAt < new Date())) {
@@ -167,7 +167,7 @@ router.get("/shared/:token", optionalAuth, async (req: AuthenticatedRequest, res
 
 router.post("/:id/analytics", async (req, res) => {
   const videoId = Number(req.params.id);
-  const parsed = AnalyticsEvent.safeParse(req.body);
+  const parsed = RecordAnalyticsBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: "Invalid analytics data" });
     return;

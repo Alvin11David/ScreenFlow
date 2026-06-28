@@ -1,7 +1,7 @@
 import { Router, type IRouter } from "express";
 import { db, teamsTable, teamMembersTable, usersTable } from "@workspace/db";
 import { eq, and } from "drizzle-orm";
-import { CreateTeamRequest, AddMemberRequest } from "@workspace/api-zod";
+import { CreateTeamBody, AddTeamMemberBody } from "@workspace/api-zod";
 import { requireAuth, type AuthenticatedRequest } from "../middlewares/auth";
 import { getUserByEmail } from "../lib/auth";
 
