@@ -17,14 +17,18 @@ export function CommandPalette() {
     return () => document.removeEventListener("keydown", down);
   }, []);
 
+  function close() {
+    setOpen(false);
+  }
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="p-0 overflow-hidden shadow-2xl bg-background/95 backdrop-blur-xl border-white/10 sm:max-w-[600px] gap-0">
         <Command className="w-full flex flex-col bg-transparent">
           <div className="flex items-center border-b border-white/10 px-3">
             <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
-            <Command.Input 
-              placeholder="Type a command or search..." 
+            <Command.Input
+              placeholder="Type a command or search..."
               className="flex h-12 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
             />
           </div>
@@ -36,6 +40,7 @@ export function CommandPalette() {
               <Command.Item
                 className="flex cursor-pointer items-center rounded-sm px-2 py-2.5 text-sm hover:bg-white/10 aria-selected:bg-white/10 transition-colors"
                 onSelect={() => {
+                  close();
                   window.open("https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing", "_blank", "noopener,noreferrer");
                   window.location.href = "/thanks";
                 }}
@@ -43,24 +48,36 @@ export function CommandPalette() {
                 <Laptop className="mr-2 h-4 w-4" />
                 <span>Download ScreenFlow</span>
               </Command.Item>
-              <Command.Item className="flex cursor-pointer items-center rounded-sm px-2 py-2.5 text-sm hover:bg-white/10 aria-selected:bg-white/10 transition-colors">
+              <Command.Item
+                className="flex cursor-pointer items-center rounded-sm px-2 py-2.5 text-sm hover:bg-white/10 aria-selected:bg-white/10 transition-colors"
+                onSelect={() => { close(); window.location.href = "/#pricing"; }}
+              >
                 <CreditCard className="mr-2 h-4 w-4" />
                 <span>Pricing Plans</span>
               </Command.Item>
-              <Command.Item className="flex cursor-pointer items-center rounded-sm px-2 py-2.5 text-sm hover:bg-white/10 aria-selected:bg-white/10 transition-colors">
+              <Command.Item
+                className="flex cursor-pointer items-center rounded-sm px-2 py-2.5 text-sm hover:bg-white/10 aria-selected:bg-white/10 transition-colors"
+                onSelect={() => { close(); window.location.href = "/#faq"; }}
+              >
                 <HelpCircle className="mr-2 h-4 w-4" />
-                <span>Documentation</span>
+                <span>FAQ</span>
               </Command.Item>
             </Command.Group>
             <Command.Separator className="my-1 h-px bg-white/10" />
-            <Command.Group heading="Settings" className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
-              <Command.Item className="flex cursor-pointer items-center rounded-sm px-2 py-2.5 text-sm hover:bg-white/10 aria-selected:bg-white/10 transition-colors">
-                <User className="mr-2 h-4 w-4" />
-                <span>Profile</span>
+            <Command.Group heading="Account" className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
+              <Command.Item
+                className="flex cursor-pointer items-center rounded-sm px-2 py-2.5 text-sm hover:bg-white/10 aria-selected:bg-white/10 transition-colors"
+                onSelect={() => { close(); window.location.href = "/login"; }}
+              >
+                <LogOut className="mr-2 h-4 w-4" />
+                <span>Sign in</span>
               </Command.Item>
-              <Command.Item className="flex cursor-pointer items-center rounded-sm px-2 py-2.5 text-sm hover:bg-white/10 aria-selected:bg-white/10 transition-colors">
-                <Settings className="mr-2 h-4 w-4" />
-                <span>Settings</span>
+              <Command.Item
+                className="flex cursor-pointer items-center rounded-sm px-2 py-2.5 text-sm hover:bg-white/10 aria-selected:bg-white/10 transition-colors"
+                onSelect={() => { close(); window.location.href = "/register"; }}
+              >
+                <User className="mr-2 h-4 w-4" />
+                <span>Create account</span>
               </Command.Item>
             </Command.Group>
           </Command.List>
