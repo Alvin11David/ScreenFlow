@@ -17,6 +17,8 @@ tags:
     description: Team management
   - name: subscriptions
     description: Subscription management
+  - name: stats
+    description: Platform statistics
 paths:
   /stats:
     get:
@@ -446,6 +448,23 @@ components:
           type: string
       required:
         - message
+
+    StatsResponse:
+      type: object
+      properties:
+        activeUsers:
+          type: integer
+        videosCreated:
+          type: integer
+        appStoreRating:
+          type: number
+        countries:
+          type: integer
+      required:
+        - activeUsers
+        - videosCreated
+        - appStoreRating
+        - countries
 
     RegisterRequest:
       type: object
