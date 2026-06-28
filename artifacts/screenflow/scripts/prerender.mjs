@@ -51,6 +51,8 @@ async function prerender() {
     console.log("Launching browser...");
     browser = await puppeteer.launch({
       headless: true,
+      executablePath:
+        "C:\\Users\\User\\.cache\\puppeteer\\chrome-headless-shell\\win64-150.0.7871.24\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
 
