@@ -1,7 +1,7 @@
 import { Router, type IRouter } from "express";
 import { db, subscriptionsTable } from "@workspace/db";
 import { eq } from "drizzle-orm";
-import { UpdateSubscriptionRequest } from "@workspace/api-zod";
+import { UpdateSubscriptionBody } from "@workspace/api-zod";
 import { requireAuth, type AuthenticatedRequest } from "../middlewares/auth";
 
 const router: IRouter = Router();
@@ -26,7 +26,7 @@ router.get("/me", requireAuth, async (req: AuthenticatedRequest, res) => {
 });
 
 router.put("/me", requireAuth, async (req: AuthenticatedRequest, res) => {
-  const parsed = UpdateSubscriptionRequest.safeParse(req.body);
+  const parsed = UpdateSubscriptionBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: "Invalid plan" });
     return;

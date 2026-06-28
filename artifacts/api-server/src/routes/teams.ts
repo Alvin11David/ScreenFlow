@@ -8,7 +8,7 @@ import { getUserByEmail } from "../lib/auth";
 const router: IRouter = Router();
 
 router.post("/", requireAuth, async (req: AuthenticatedRequest, res) => {
-  const parsed = CreateTeamRequest.safeParse(req.body);
+  const parsed = CreateTeamBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: parsed.error.issues[0]?.message ?? "Invalid input" });
     return;
@@ -93,7 +93,7 @@ router.get("/:id", requireAuth, async (req: AuthenticatedRequest, res) => {
 
 router.post("/:id/members", requireAuth, async (req: AuthenticatedRequest, res) => {
   const teamId = Number(req.params.id);
-  const parsed = AddMemberRequest.safeParse(req.body);
+  const parsed = AddTeamMemberBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: "Valid email is required" });
     return;
