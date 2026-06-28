@@ -8,6 +8,7 @@ import { useTheme } from "@/components/ThemeProvider";
 import { useAuth } from "@/hooks/use-auth";
 
 export function Navbar() {
+  const { user } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, setTheme } = useTheme();
 
@@ -75,7 +76,11 @@ export function Navbar() {
             <Command className="w-3 h-3" />
             <span>K</span>
           </div>
-          <a href="/login" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Sign in</a>
+          {user ? (
+            <a href="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Dashboard</a>
+          ) : (
+            <a href="/login" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Sign in</a>
+          )}
           <Button
             data-testid="button-download-nav"
             onClick={() => {
