@@ -5,7 +5,9 @@
  * ScreenFlow API
  * OpenAPI spec version: 0.1.0
  */
+import type { Video } from './video';
 
-export interface HealthStatus {
-  status: string;
+export interface VideoListResponse {
+  videos: Video[];
+  total: number;
 }

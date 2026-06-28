@@ -1,22 +1,28 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: ScreenFlow API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: auth
+    description: Authentication
+  - name: videos
+    description: Video management
+  - name: teams
+    description: Team management
+  - name: subscriptions
+    description: Subscription management
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +30,385 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /auth/register:
+    post:
+      operationId: register
+      tags: [auth]
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterRequest"
+      responses:
+        "201":
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "409":
+          description: Email already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /auth/login:
+    post:
+      operationId: login
+      tags: [auth]
+      summary: Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /auth/logout:
+    post:
+      operationId: logout
+      tags: [auth]
+      summary: Logout
+      responses:
+        "200":
+          description: Logged out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+
+  /auth/me:
+    get:
+      operationId: getMe
+      tags: [auth]
+      summary: Get current user
+      responses:
+        "200":
+          description: Current user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+        "401":
+          description: Not authenticated
+
+  /videos:
+    get:
+      operationId: listVideos
+      tags: [videos]
+      summary: List user's videos
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        "200":
+          description: List of videos
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VideoListResponse"
+    post:
+      operationId: createVideo
+      tags: [videos]
+      summary: Create a video
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateVideoRequest"
+      responses:
+        "201":
+          description: Video created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VideoResponse"
+
+  /videos/{id}:
+    get:
+      operationId: getVideo
+      tags: [videos]
+      summary: Get a video
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Video details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VideoResponse"
+        "404":
+          description: Video not found
+    patch:
+      operationId: updateVideo
+      tags: [videos]
+      summary: Update a video
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateVideoRequest"
+      responses:
+        "200":
+          description: Video updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VideoResponse"
+    delete:
+      operationId: deleteVideo
+      tags: [videos]
+      summary: Delete a video
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Video deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+
+  /videos/{id}/share:
+    post:
+      operationId: createShareLink
+      tags: [videos]
+      summary: Create a share link for a video
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateShareRequest"
+      responses:
+        "200":
+          description: Share link created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ShareResponse"
+
+  /videos/shared/{token}:
+    get:
+      operationId: getSharedVideo
+      tags: [videos]
+      summary: Get a shared video by token
+      parameters:
+        - name: token
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Shared video
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SharedVideoResponse"
+        "404":
+          description: Share link not found or expired
+
+  /videos/{id}/analytics:
+    post:
+      operationId: recordAnalytics
+      tags: [videos]
+      summary: Record a video analytics event
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyticsEvent"
+      responses:
+        "200":
+          description: Analytics recorded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+
+  /teams:
+    post:
+      operationId: createTeam
+      tags: [teams]
+      summary: Create a team
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTeamRequest"
+      responses:
+        "201":
+          description: Team created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeamResponse"
+    get:
+      operationId: listTeams
+      tags: [teams]
+      summary: List user's teams
+      responses:
+        "200":
+          description: List of teams
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeamListResponse"
+
+  /teams/{id}:
+    get:
+      operationId: getTeam
+      tags: [teams]
+      summary: Get team details
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Team details with members
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeamDetailResponse"
+
+  /teams/{id}/members:
+    post:
+      operationId: addTeamMember
+      tags: [teams]
+      summary: Add a member to a team
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddMemberRequest"
+      responses:
+        "200":
+          description: Member added
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeamMemberResponse"
+
+  /teams/{id}/members/{userId}:
+    delete:
+      operationId: removeTeamMember
+      tags: [teams]
+      summary: Remove a member from a team
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Member removed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+
+  /subscriptions/me:
+    get:
+      operationId: getMySubscription
+      tags: [subscriptions]
+      summary: Get current user's subscription
+      responses:
+        "200":
+          description: Current subscription
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubscriptionResponse"
+    put:
+      operationId: updateSubscription
+      tags: [subscriptions]
+      summary: Update subscription plan
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSubscriptionRequest"
+      responses:
+        "200":
+          description: Subscription updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubscriptionResponse"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +419,361 @@ components:
       required:
         - status
 
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+
+    MessageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
+
+    RegisterRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        password:
+          type: string
+          minLength: 8
+      required:
+        - email
+        - name
+        - password
+
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+      required:
+        - email
+        - password
+
+    AuthResponse:
+      type: object
+      properties:
+        user:
+          $ref: "#/components/schemas/User"
+      required:
+        - user
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        name:
+          type: string
+        avatarUrl:
+          type: string
+          nullable: true
+        role:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - email
+        - name
+        - role
+        - createdAt
+
+    UserResponse:
+      type: object
+      properties:
+        user:
+          $ref: "#/components/schemas/User"
+      required:
+        - user
+
+    CreateVideoRequest:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+      required:
+        - title
+
+    UpdateVideoRequest:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        visibility:
+          type: string
+          enum: [private, public, team]
+
+    Video:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+          nullable: true
+        fileUrl:
+          type: string
+          nullable: true
+        thumbnailUrl:
+          type: string
+          nullable: true
+        duration:
+          type: number
+          nullable: true
+        resolution:
+          type: string
+          nullable: true
+        fileSize:
+          type: integer
+          nullable: true
+        status:
+          type: string
+        visibility:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - userId
+        - title
+        - status
+        - visibility
+        - createdAt
+        - updatedAt
+
+    VideoResponse:
+      type: object
+      properties:
+        video:
+          $ref: "#/components/schemas/Video"
+      required:
+        - video
+
+    VideoListResponse:
+      type: object
+      properties:
+        videos:
+          type: array
+          items:
+            $ref: "#/components/schemas/Video"
+        total:
+          type: integer
+      required:
+        - videos
+        - total
+
+    CreateShareRequest:
+      type: object
+      properties:
+        password:
+          type: string
+        expiresInHours:
+          type: integer
+
+    ShareResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        url:
+          type: string
+      required:
+        - token
+        - url
+
+    SharedVideoResponse:
+      type: object
+      properties:
+        video:
+          $ref: "#/components/schemas/Video"
+        owner:
+          $ref: "#/components/schemas/User"
+      required:
+        - video
+        - owner
+
+    AnalyticsEvent:
+      type: object
+      properties:
+        watchedSeconds:
+          type: number
+        totalDuration:
+          type: number
+        referrer:
+          type: string
+      required:
+        - watchedSeconds
+        - totalDuration
+
+    CreateTeamRequest:
+      type: object
+      properties:
+        name:
+          type: string
+      required:
+        - name
+
+    Team:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        slug:
+          type: string
+        ownerId:
+          type: integer
+        memberCount:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - slug
+        - ownerId
+        - createdAt
+
+    TeamResponse:
+      type: object
+      properties:
+        team:
+          $ref: "#/components/schemas/Team"
+      required:
+        - team
+
+    TeamListResponse:
+      type: object
+      properties:
+        teams:
+          type: array
+          items:
+            $ref: "#/components/schemas/Team"
+      required:
+        - teams
+
+    TeamDetailResponse:
+      type: object
+      properties:
+        team:
+          $ref: "#/components/schemas/Team"
+        members:
+          type: array
+          items:
+            $ref: "#/components/schemas/TeamMember"
+      required:
+        - team
+        - members
+
+    TeamMember:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        teamId:
+          type: integer
+        role:
+          type: string
+        user:
+          $ref: "#/components/schemas/User"
+      required:
+        - id
+        - userId
+        - teamId
+        - role
+
+    TeamMemberResponse:
+      type: object
+      properties:
+        member:
+          $ref: "#/components/schemas/TeamMember"
+      required:
+        - member
+
+    AddMemberRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+        - email
+
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        teamId:
+          type: integer
+          nullable: true
+        plan:
+          type: string
+          enum: [free, pro, team]
+        status:
+          type: string
+        currentPeriodStart:
+          type: string
+          format: date-time
+        currentPeriodEnd:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - id
+        - userId
+        - plan
+        - status
+        - currentPeriodStart
+
+    SubscriptionResponse:
+      type: object
+      properties:
+        subscription:
+          $ref: "#/components/schemas/Subscription"
+      required:
+        - subscription
+
+    UpdateSubscriptionRequest:
+      type: object
+      properties:
+        plan:
+          type: string
+          enum: [free, pro, team]
+      required:
+        - plan

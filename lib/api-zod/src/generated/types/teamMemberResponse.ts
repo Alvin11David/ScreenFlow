@@ -5,7 +5,8 @@
  * ScreenFlow API
  * OpenAPI spec version: 0.1.0
  */
+import type { TeamMember } from './teamMember';
 
-export interface HealthStatus {
-  status: string;
+export interface TeamMemberResponse {
+  member: TeamMember;
 }
