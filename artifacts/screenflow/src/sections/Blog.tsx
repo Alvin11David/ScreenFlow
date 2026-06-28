@@ -68,7 +68,7 @@ export function Blog() {
             </motion.p>
           </div>
           <motion.a
-            href="/#"
+            href="/#blog"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}

@@ -3,21 +3,21 @@ const footerLinks: Record<string, Array<{ label: string; href: string }>> = {
     { label: "Features", href: "/#features" },
     { label: "Pricing", href: "/#pricing" },
     { label: "Download", href: "https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing" },
-    { label: "Changelog", href: "#" },
-    { label: "Roadmap", href: "#" },
+    { label: "Changelog", href: "/#blog" },
+    { label: "Roadmap", href: "/#features" },
   ],
   Resources: [
     { label: "Blog", href: "/#blog" },
-    { label: "Help Center", href: "#" },
-    { label: "API Docs", href: "#" },
-    { label: "Status", href: "#" },
+    { label: "Help Center", href: "mailto:support@screenflow.io" },
+    { label: "API Docs", href: "/#" },
+    { label: "Status", href: "/#" },
   ],
   Company: [
-    { label: "About", href: "#" },
-    { label: "Careers", href: "#" },
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms of Service", href: "#" },
-    { label: "Press", href: "#" },
+    { label: "About", href: "/#" },
+    { label: "Careers", href: "/#" },
+    { label: "Privacy Policy", href: "/#" },
+    { label: "Terms of Service", href: "/#" },
+    { label: "Press", href: "/#" },
   ],
 };
 
@@ -42,13 +42,19 @@ export function Footer() {
               The screen recorder for creative professionals. Built with precision and care to help you share your best work.
             </p>
             <div className="flex items-center gap-4">
-              {["Twitter", "GitHub", "Discord"].map((social) => (
+              {[
+                { name: "Twitter", href: "https://x.com/screenflow" },
+                { name: "GitHub", href: "https://github.com/screenflow" },
+                { name: "Discord", href: "https://discord.gg/screenflow" },
+              ].map((social) => (
                 <a
-                  key={social}
-                  href="#"
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  {social}
+                  {social.name}
                 </a>
               ))}
             </div>

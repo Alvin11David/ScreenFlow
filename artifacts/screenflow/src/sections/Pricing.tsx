@@ -126,6 +126,14 @@ export function Pricing() {
 
               <Button
                 data-testid={`button-plan-${plan.name.toLowerCase()}`}
+                onClick={() => {
+                  if (plan.name === "Free") {
+                    window.open("https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing", "_blank", "noopener,noreferrer");
+                    window.location.href = "/thanks";
+                  } else {
+                    window.location.href = "/register";
+                  }
+                }}
                 className={`w-full mb-8 rounded-full h-11 font-semibold ${
                   plan.popular
                     ? "bg-primary text-primary-foreground hover:bg-primary/90"

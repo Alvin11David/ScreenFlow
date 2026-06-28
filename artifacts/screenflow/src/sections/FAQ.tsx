@@ -72,7 +72,7 @@ export function FAQ() {
                 className="text-muted-foreground leading-relaxed"
               >
                 Can't find the answer you're looking for? Reach out to our{" "}
-                <a href="/#" className="text-primary underline underline-offset-4 hover:text-primary/80 transition-colors">
+                <a href="mailto:support@screenflow.io" className="text-primary underline underline-offset-4 hover:text-primary/80 transition-colors">
                   support team
                 </a>
                 .
