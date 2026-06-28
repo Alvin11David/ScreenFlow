@@ -18,6 +18,18 @@ tags:
   - name: subscriptions
     description: Subscription management
 paths:
+  /stats:
+    get:
+      operationId: getStats
+      tags: [stats]
+      summary: Get public platform stats
+      responses:
+        "200":
+          description: Platform statistics
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatsResponse"
   /healthz:
     get:
       operationId: healthCheck
