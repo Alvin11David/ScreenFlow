@@ -30,7 +30,6 @@ function startServer(rootDir) {
     let filePath = path.join(rootDir, req.url === "/" ? "index.html" : req.url);
 
     if (!fs.existsSync(filePath)) {
-      // SPA fallback: serve index.html
       filePath = path.join(rootDir, "index.html");
     }
 
@@ -52,7 +51,7 @@ async function prerender() {
     browser = await puppeteer.launch({
       headless: true,
       executablePath:
-        "C:\\Users\\User\\.cache\\puppeteer\\chrome-headless-shell\\win64-150.0.7871.24\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+        "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
 
