@@ -5,6 +5,7 @@ import { Menu, Command, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useTheme } from "@/components/ThemeProvider";
+import { useAuth } from "@/hooks/use-auth";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
