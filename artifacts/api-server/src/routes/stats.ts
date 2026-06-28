@@ -4,8 +4,8 @@ const router: IRouter = Router();
 
 router.get("/stats", (_req, res) => {
   res.json({
-    activeUsers: 500000,
-    videosCreated: 10000000,
+    activeUsers: 500,
+    videosCreated: 10,
     appStoreRating: 4.9,
     countries: 180,
   });
