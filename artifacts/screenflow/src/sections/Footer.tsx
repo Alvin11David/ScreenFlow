@@ -1,10 +1,27 @@
-export function Footer() {
-  const links = {
-    Product: ["Features", "Pricing", "Download", "Changelog", "Roadmap"],
-    Resources: ["Blog", "Help Center", "Community", "API Docs", "Status"],
-    Company: ["About", "Careers", "Privacy Policy", "Terms of Service", "Press"],
-  };
+const footerLinks: Record<string, Array<{ label: string; href: string }>> = {
+  Product: [
+    { label: "Features", href: "/#features" },
+    { label: "Pricing", href: "/#pricing" },
+    { label: "Download", href: "https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing" },
+    { label: "Changelog", href: "#" },
+    { label: "Roadmap", href: "#" },
+  ],
+  Resources: [
+    { label: "Blog", href: "/#blog" },
+    { label: "Help Center", href: "#" },
+    { label: "API Docs", href: "#" },
+    { label: "Status", href: "#" },
+  ],
+  Company: [
+    { label: "About", href: "#" },
+    { label: "Careers", href: "#" },
+    { label: "Privacy Policy", href: "#" },
+    { label: "Terms of Service", href: "#" },
+    { label: "Press", href: "#" },
+  ],
+};
 
+export function Footer() {
   return (
     <footer className="border-t border-border bg-background pt-20 pb-10">
       <div className="container mx-auto px-4">
@@ -15,6 +32,11 @@ export function Footer() {
                 S
               </div>
               <span className="font-bold text-lg tracking-tight text-foreground">ScreenFlow</span>
+            </div>
+            <div className="flex items-center gap-2 mb-4">
+              <a href="/login" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Sign in</a>
+              <span className="text-muted-foreground">·</span>
+              <a href="/register" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Get started</a>
             </div>
             <p className="text-muted-foreground text-sm max-w-xs mb-8 leading-relaxed">
               The screen recorder for creative professionals. Built with precision and care to help you share your best work.
@@ -32,20 +54,19 @@ export function Footer() {
             </div>
           </div>
 
-          {Object.entries(links).map(([section, items]) => (
+          {Object.entries(footerLinks).map(([section, items]) => (
             <div key={section}>
               <h4 className="font-semibold mb-5 text-sm text-foreground">{section}</h4>
               <ul className="space-y-3 text-sm text-muted-foreground">
                 {items.map((item) => (
-                  <li key={item}>
+                  <li key={item.label}>
                     <a
-                      href={item === "Download" ? "https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing" : "#"}
-                      target={item === "Download" ? "_blank" : undefined}
-                      rel={item === "Download" ? "noopener noreferrer" : undefined}
-                      onClick={item === "Download" ? (e) => { setTimeout(() => { window.location.href = "/thanks"; }, 100); } : undefined}
+                      href={item.href}
+                      target={item.href.startsWith("http") ? "_blank" : undefined}
+                      rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       className="hover:text-foreground transition-colors"
                     >
-                      {item}
+                      {item.label}
                     </a>
                   </li>
                 ))}
