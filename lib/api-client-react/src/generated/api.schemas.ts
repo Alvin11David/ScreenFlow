@@ -17,6 +17,13 @@ export interface MessageResponse {
   message: string;
 }
 
+export interface StatsResponse {
+  activeUsers: number;
+  videosCreated: number;
+  appStoreRating: number;
+  countries: number;
+}
+
 export interface RegisterRequest {
   email: string;
   name: string;

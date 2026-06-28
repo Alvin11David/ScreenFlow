@@ -9,6 +9,17 @@ import * as zod from 'zod';
 
 
 /**
+ * @summary Get public platform stats
+ */
+export const GetStatsResponse = zod.object({
+  "activeUsers": zod.number(),
+  "videosCreated": zod.number(),
+  "appStoreRating": zod.number(),
+  "countries": zod.number()
+})
+
+
+/**
  * @summary Health check
  */
 export const HealthCheckResponse = zod.object({

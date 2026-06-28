@@ -34,6 +34,7 @@ import type {
   RegisterRequest,
   ShareResponse,
   SharedVideoResponse,
+  StatsResponse,
   SubscriptionResponse,
   TeamDetailResponse,
   TeamListResponse,
@@ -72,6 +73,83 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   }
   return result;
 };
+
+export const getGetStatsUrl = () => {
+
+
+
+
+  return `/api/stats`
+}
+
+/**
+ * @summary Get public platform stats
+ */
+export const getStats = async ( options?: RequestInit): Promise<StatsResponse> => {
+
+  return customFetch<StatsResponse>(getGetStatsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetStatsQueryKey = () => {
+    return [
+    `/api/stats`
+    ] as const;
+    }
+
+
+export const getGetStatsQueryOptions = <TData = Awaited<ReturnType<typeof getStats>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getStats>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetStatsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getStats>>> = ({ signal }) => getStats({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getStats>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetStatsQueryResult = NonNullable<Awaited<ReturnType<typeof getStats>>>
+export type GetStatsQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary Get public platform stats
+ */
+
+export function useGetStats<TData = Awaited<ReturnType<typeof getStats>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getStats>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetStatsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
 
 export const getHealthCheckUrl = () => {
 

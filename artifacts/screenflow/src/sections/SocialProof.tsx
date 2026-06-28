@@ -1,16 +1,24 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
+import { useGetStats } from "@workspace/api-client-react";
+
+const fallbackStats = {
+  activeUsers: 500,
+  videosCreated: 10,
+  appStoreRating: 4.9,
+  countries: 180,
+};
 
 const logos = [
   "Vercel", "Linear", "Raycast", "Framer", "Stripe",
   "Notion", "Figma", "Loom", "Arc", "Clerk",
 ];
 
-const stats = [
-  { value: 500, suffix: "K+", label: "Active users",    decimals: 0 },
-  { value: 10,  suffix: "M+", label: "Videos created", decimals: 0 },
-  { value: 4.9, suffix: "",   label: "App Store rating",decimals: 1 },
-  { value: 180, suffix: "+",  label: "Countries",       decimals: 0 },
+const statConfig = [
+  { key: "activeUsers" as const, suffix: "K+", label: "Active users", decimals: 0 },
+  { key: "videosCreated" as const, suffix: "M+", label: "Videos created", decimals: 0 },
+  { key: "appStoreRating" as const, suffix: "", label: "App Store rating", decimals: 1 },
+  { key: "countries" as const, suffix: "+", label: "Countries", decimals: 0 },
 ];
 
 function CountUp({ target, suffix, decimals }: { target: number; suffix: string; decimals: number }) {
@@ -41,12 +49,14 @@ function CountUp({ target, suffix, decimals }: { target: number; suffix: string;
 }
 
 export function SocialProof() {
+  const { data: statsData } = useGetStats();
+  const stats = statsData ?? fallbackStats;
+
   return (
     <section className="py-20 border-y border-border bg-muted/20 overflow-hidden">
       <div className="container mx-auto px-4">
-        {/* Stats Row */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-          {stats.map((stat, i) => (
+          {statConfig.map((stat, i) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, y: 20 }}
@@ -56,14 +66,13 @@ export function SocialProof() {
               className="text-center"
             >
               <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">
-                <CountUp target={stat.value} suffix={stat.suffix} decimals={stat.decimals} />
+                <CountUp target={stats[stat.key]} suffix={stat.suffix} decimals={stat.decimals} />
               </div>
               <p className="text-sm text-muted-foreground font-medium">{stat.label}</p>
             </motion.div>
           ))}
         </div>
 
-        {/* Logos marquee */}
         <p className="text-center text-xs text-muted-foreground mb-8 font-semibold tracking-widest uppercase">
           Trusted by craft-obsessed teams at
         </p>

@@ -20,6 +20,7 @@ export * from './messageResponse';
 export * from './registerRequest';
 export * from './sharedVideoResponse';
 export * from './shareResponse';
+export * from './statsResponse';
 export * from './subscription';
 export * from './subscriptionPlan';
 export * from './subscriptionResponse';
