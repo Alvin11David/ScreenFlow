@@ -10,6 +10,14 @@ function useClientOS() {
   return os;
 }
 
+function DownloadPlatformName() {
+  const os = useClientOS();
+  if (os === "mac") return <>Mac</>;
+  if (os === "windows") return <>Windows</>;
+  if (os === "linux") return <>Linux</>;
+  return null;
+}
+
 const waveHeights = [30,55,42,78,52,68,38,88,62,48,72,44,82,58,36,68,52,76,43,62,88,48,66,38,77,57,52,71,43,82,34,64,50,74,45,60,85,48,66,40];
 
 function ProductMockup() {
@@ -240,7 +248,7 @@ export function Hero() {
             The beautiful, impossibly fast screen recorder for teams who care about craft. No more clunky software.
           </p>
 
-          {/* CTAs */}
+              {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button
               size="lg"
@@ -252,7 +260,7 @@ export function Hero() {
               className="btn-glow rounded-full px-8 h-14 text-base gap-2 w-full sm:w-auto bg-foreground text-background hover:bg-foreground/90 transition-all duration-300"
             >
               <Download className="w-5 h-5" />
-              Download for {getOS() === "mac" ? "Mac" : getOS() === "windows" ? "Windows" : "Linux"}
+              Download for <DownloadPlatformName />
             </Button>
             <Button
               size="lg"
