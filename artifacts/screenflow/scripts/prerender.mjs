@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import puppeteer from "puppeteer";
+import os from "node:os";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, "..", "dist", "public");
@@ -41,17 +42,52 @@ function startServer(rootDir) {
   }).listen(PORT, "127.0.0.1");
 }
 
+function findBrowser() {
+  const candidates = [
+    "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+    "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+    "C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe",
+  ];
+  for (const p of candidates) {
+    if (fs.existsSync(p)) return p;
+  }
+  // Try puppeteer's bundled browser
+  const cacheDir = path.join(os.homedir(), ".cache", "puppeteer");
+  const chromeDirs = [];
+  try {
+    const chromeRoot = path.join(cacheDir, "chrome");
+    if (fs.existsSync(chromeRoot)) {
+      for (const dir of fs.readdirSync(chromeRoot)) {
+        chromeDirs.push(path.join(chromeRoot, dir));
+      }
+    }
+  } catch {}
+  for (const dir of chromeDirs) {
+    const exe = path.join(dir, "chrome-win64", "chrome.exe");
+    if (fs.existsSync(exe)) return exe;
+  }
+  return null;
+}
+
 async function prerender() {
   console.log(`Starting server on http://127.0.0.1:${PORT}...`);
   const server = startServer(distDir);
 
+  const browserPath = findBrowser();
+  if (!browserPath) {
+    console.error("No supported browser found. Install Chrome, Edge, or run `npx puppeteer browsers install chrome`.");
+    process.exitCode = 1;
+    server.close();
+    return;
+  }
+
   let browser;
   try {
-    console.log("Launching browser...");
+    console.log(`Launching ${path.basename(browserPath)}...`);
     browser = await puppeteer.launch({
       headless: true,
-      executablePath:
-        "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+      executablePath: browserPath,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
 
