@@ -4,7 +4,7 @@ import { Play, Clock, User, Film, ArrowLeft, Loader2, AlertCircle } from "lucide
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/sections/Navbar";
 import { Footer } from "@/sections/Footer";
-import { useGetSharedVideo } from "lib-api-client-react";
+import { useGetSharedVideo } from "@workspace/api-client-react";
 
 function formatDuration(seconds: number): string {
   const m = Math.floor(seconds / 60);
