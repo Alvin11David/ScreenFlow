@@ -74,6 +74,7 @@ export function Navbar() {
             <Command className="w-3 h-3" />
             <span>K</span>
           </div>
+          <a href="/login" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Sign in</a>
           <Button
             data-testid="button-download-nav"
             onClick={() => {
