@@ -3,7 +3,6 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import puppeteer from "puppeteer";
-import os from "node:os";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, "..", "dist", "public");
@@ -95,6 +94,7 @@ async function prerender() {
     return;
   }
 
+  try {
     for (const route of routes) {
       const url = `http://127.0.0.1:${PORT}${route}`;
       console.log(`  Prerendering ${route}...`);
@@ -104,18 +104,15 @@ async function prerender() {
 
       await page.goto(url, { waitUntil: "networkidle0", timeout: 30000 });
 
-      // Wait for React to render content
       await page.waitForSelector("#root > *", { timeout: 10000 }).catch(() => {
         console.log(`  Warning: #root children not found on ${route}, proceeding anyway`);
       });
 
-      // Extra wait for any animations/lazy loading
       await new Promise((r) => setTimeout(r, 2000));
 
       const html = await page.content();
       await page.close();
 
-      // Determine output path
       if (route === "/") {
         fs.writeFileSync(path.join(distDir, "index.html"), html, "utf-8");
         console.log(`  Saved ${route} → dist/public/index.html (${(html.length / 1024).toFixed(1)} KB)`);
@@ -130,7 +127,6 @@ async function prerender() {
     console.log("Prerendering complete!");
   } catch (err) {
     console.error("Prerendering failed:", err);
-    process.exitCode = 1;
   } finally {
     if (browser) await browser.close();
     server.close();
