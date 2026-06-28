@@ -1,7 +1,14 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Play, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getOS } from "@/lib/utils";
+
+function useClientOS() {
+  const [os, setOs] = useState<"mac" | "windows" | "linux" | null>(null);
+  useEffect(() => { setOs(getOS()); }, []);
+  return os;
+}
 
 const waveHeights = [30,55,42,78,52,68,38,88,62,48,72,44,82,58,36,68,52,76,43,62,88,48,66,38,77,57,52,71,43,82,34,64,50,74,45,60,85,48,66,40];
 
