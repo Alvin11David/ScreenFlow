@@ -1,7 +1,14 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Monitor, Apple, Terminal, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getOS } from "@/lib/utils";
+
+function useClientOS() {
+  const [os, setOs] = useState<"mac" | "windows" | "linux" | null>(null);
+  useEffect(() => { setOs(getOS()); }, []);
+  return os;
+}
 
 const allPlatforms = [
   {
@@ -27,9 +34,9 @@ const allPlatforms = [
   },
 ];
 
-const platforms = allPlatforms.toSorted((a) => (a.os === getOS() ? -1 : 0));
-
 export function DownloadSection() {
+  const os = useClientOS();
+  const platforms = allPlatforms.toSorted((a) => (a.os === os ? -1 : 0));
   return (
     <section className="py-32 relative overflow-hidden">
       {/* Background blobs */}
@@ -96,7 +103,7 @@ export function DownloadSection() {
                       window.location.href = "/thanks";
                     }}
                     className={`rounded-full px-7 h-14 text-sm font-semibold gap-2.5 flex flex-col items-center justify-center h-auto py-3 ${
-                      p.os === getOS()
+                      p.os === os
                         ? "bg-foreground text-background hover:bg-foreground/90"
                         : "bg-muted border border-border hover:bg-muted/80 text-foreground"
                     }`}
@@ -105,7 +112,7 @@ export function DownloadSection() {
                       <Icon className="w-4 h-4" />
                       {p.label}
                     </span>
-                    <span className={`text-xs font-normal ${p.os === getOS() ? "opacity-60" : "text-muted-foreground"}`}>
+                    <span className={`text-xs font-normal ${p.os === os ? "opacity-60" : "text-muted-foreground"}`}>
                       {p.sub}
                     </span>
                   </Button>
