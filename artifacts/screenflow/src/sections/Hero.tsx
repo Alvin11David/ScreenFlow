@@ -251,6 +251,7 @@ export function Hero() {
               size="lg"
               variant="outline"
               data-testid="button-watch-film"
+              onClick={() => { window.location.href = "/#testimonials"; }}
               className="rounded-full px-8 h-14 text-base gap-2 w-full sm:w-auto border-foreground/20 dark:border-white/20 hover:bg-muted dark:hover:bg-white/5 bg-transparent text-foreground transition-all duration-300"
             >
               <Play className="w-5 h-5" />
