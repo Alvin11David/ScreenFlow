@@ -2,7 +2,7 @@ import { Router, type IRouter } from "express";
 import { db, videosTable, videoSharesTable, videoAnalyticsTable, usersTable } from "@workspace/db";
 import { eq, and, desc, count, sql } from "drizzle-orm";
 import crypto from "node:crypto";
-import { CreateVideoRequest, UpdateVideoRequest, CreateShareRequest, AnalyticsEvent } from "@workspace/api-zod";
+import { CreateVideoBody, UpdateVideoBody, CreateShareLinkBody, RecordAnalyticsBody } from "@workspace/api-zod";
 import { requireAuth, optionalAuth, type AuthenticatedRequest } from "../middlewares/auth";
 
 const router: IRouter = Router();

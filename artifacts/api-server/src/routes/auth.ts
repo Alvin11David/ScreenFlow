@@ -1,14 +1,14 @@
 import { Router, type IRouter } from "express";
 import { db, usersTable } from "@workspace/db";
 import { eq } from "drizzle-orm";
-import { RegisterRequest, LoginRequest } from "@workspace/api-zod";
+import { RegisterBody, LoginBody } from "@workspace/api-zod";
 import { hashPassword, verifyPassword, createSession, deleteSession, getUserById, getUserByEmail } from "../lib/auth";
 import { requireAuth, type AuthenticatedRequest } from "../middlewares/auth";
 
 const router: IRouter = Router();
 
 router.post("/register", async (req, res) => {
-  const parsed = RegisterRequest.safeParse(req.body);
+  const parsed = RegisterBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: parsed.error.issues[0]?.message ?? "Invalid input" });
     return;
@@ -41,7 +41,7 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  const parsed = LoginRequest.safeParse(req.body);
+  const parsed = LoginBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: parsed.error.issues[0]?.message ?? "Invalid input" });
     return;
