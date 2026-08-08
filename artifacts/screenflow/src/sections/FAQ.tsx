@@ -50,7 +50,7 @@ export function FAQ() {
             {/* Right column: accordion */}
             <div className="md:col-span-3">
               <Accordion type="single" collapsible className="w-full">
-                {faqs.map((faq, idx) => (
+                {homeFaqs.map((faq, idx) => (
                   <motion.div
                     key={faq.question}
                     initial={{ opacity: 0, y: 10 }}
