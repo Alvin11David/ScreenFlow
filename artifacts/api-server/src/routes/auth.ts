@@ -2,7 +2,17 @@ import { Router, type IRouter } from "express";
 import { db, usersTable } from "@workspace/db";
 import { eq } from "drizzle-orm";
 import { RegisterBody, LoginBody } from "@workspace/api-zod";
-import { hashPassword, verifyPassword, createSession, deleteSession, getUserById, getUserByEmail } from "../lib/auth";
+import {
+  hashPassword,
+  verifyPassword,
+  createSession,
+  deleteSession,
+  getUserById,
+  getUserByEmail,
+  createPasswordResetToken,
+  verifyPasswordResetToken,
+} from "../lib/auth";
+import { sendResetCodeEmail } from "../lib/mail";
 import { requireAuth, getRequestToken, type AuthenticatedRequest } from "../middlewares/auth";
 import { authRateLimit } from "../middlewares/rate-limit";
 
@@ -85,6 +95,55 @@ router.get("/me", requireAuth, async (req: AuthenticatedRequest, res) => {
     return;
   }
   res.json({ user });
+});
+
+router.post("/forgot-password", authRateLimit, async (req, res) => {
+  const { email } = req.body as { email?: string };
+  if (!email) {
+    res.status(400).json({ error: "Email is required" });
+    return;
+  }
+
+  const user = await getUserByEmail(email);
+  if (!user) {
+    res.status(200).json({ message: "If an account exists, a reset code has been sent" });
+    return;
+  }
+
+  const token = await createPasswordResetToken(user.id, user.email);
+  const code = token.slice(0, 5).toUpperCase();
+
+  try {
+    await sendResetCodeEmail(user.email, code);
+  } catch {
+    console.error("Failed to send reset email");
+  }
+
+  res.status(200).json({ message: "If an account exists, a reset code has been sent" });
+});
+
+router.post("/verify-reset-code", authRateLimit, async (req, res) => {
+  const { email, code } = req.body as { email?: string; code?: string };
+  if (!email || !code) {
+    res.status(400).json({ error: "Email and code are required" });
+    return;
+  }
+
+  const user = await getUserByEmail(email);
+  if (!user) {
+    res.status(400).json({ error: "Invalid code" });
+    return;
+  }
+
+  const token = await createPasswordResetToken(user.id, user.email);
+  const expectedCode = token.slice(0, 5).toUpperCase();
+
+  if (code !== expectedCode) {
+    res.status(400).json({ error: "Invalid code" });
+    return;
+  }
+
+  res.status(200).json({ message: "Code verified", userId: user.id });
 });
 
 export default router;
