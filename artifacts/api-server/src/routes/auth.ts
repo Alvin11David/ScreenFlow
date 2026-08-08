@@ -149,7 +149,7 @@ router.post("/verify-reset-code", authRateLimit, async (req, res) => {
 
   const expectedCode = record.token.slice(0, 5).toUpperCase();
 
-  if (code !== expectedCode) {
+  if (code.toUpperCase() !== expectedCode) {
     res.status(400).json({ error: "Invalid code" });
     return;
   }
