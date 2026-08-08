@@ -45,16 +45,14 @@ const DEFAULT_PROPS = {
 };
 
 const VERT = `
-#version 300 es
 precision highp float;
-in vec3 position;
+attribute vec3 position;
 void main(){
   gl_Position = vec4(position, 1.0);
 }
 `;
 
 const FRAG = `
-#version 300 es
 precision highp float;
 precision mediump int;
 
@@ -143,8 +141,6 @@ uniform float uFade;
 #define EDGE_LUMA_T0 0.0
 #define EDGE_LUMA_T1 2.0
 #define DITHER_STRENGTH 1.0
-
-out vec4 fragColor;
 
     float g(float x){return x<=0.00031308?12.92*x:1.055*pow(x,1.0/2.4)-0.055;}
     float bs(vec2 p,vec2 q,float powr){
@@ -244,7 +240,11 @@ void mainImage(out vec4 fc,in vec2 frag){
     float n=fbm2(fuv+vec2(fbm2(fuv+vec2(7.3,2.1)),fbm2(fuv+vec2(-3.7,5.9)))*0.6);
     n=pow(clamp(n,0.0,1.0),FOG_CONTRAST);
     float pixW = 1.0 / max(iResolution.y, 1.0);
+#ifdef GL_OES_standard_derivatives
     float wL = max(fwidth(L), pixW);
+#else
+    float wL = pixW;
+#endif
     float m0=pow(smoothstep(FOG_BEAM_MIN - wL, FOG_BEAM_MAX + wL, L),FOG_MASK_GAMMA);
     float bm=1.0-pow(1.0-m0,FOG_EXPAND_SHAPE); bm=mix(bm*m0,bm,FOG_EDGE_MIX);
     float yP=1.0-smoothstep(HFOG_Y_RADIUS,HFOG_Y_RADIUS+HFOG_Y_SOFT,abs(yPix));
