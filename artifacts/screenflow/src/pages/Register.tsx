@@ -36,14 +36,21 @@ export default function Register() {
 
   return (
     <div className="fixed inset-0 overflow-hidden bg-black">
-      <LaserFlow className="absolute inset-0" color={LASER_COLOR} horizontalBeamOffset={0} verticalBeamOffset={0} />
+      <GridDistortion
+        className="absolute inset-0"
+        imageSrc={GRID_IMAGE}
+        grid={15}
+        mouse={0.1}
+        strength={0.15}
+        relaxation={0.9}
+      />
       <div className="pointer-events-none absolute inset-0 bg-black/40" />
       <Link href="/login" className="absolute top-4 left-4 z-20 inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors">
         <ArrowLeft className="h-4 w-4 mr-1" />
         Back
       </Link>
       <div className="relative z-10 flex h-full items-center justify-center p-4">
-        <Card className="w-full max-w-md border-2 bg-card/80 backdrop-blur-md" style={{ borderColor: LASER_COLOR }}>
+        <Card className="w-full max-w-md border-2 bg-card/80 backdrop-blur-md" style={{ borderColor: GRID_COLOR }}>
         <CardHeader className="text-center">
           <Link href="/" className="text-2xl font-bold text-foreground mb-2 block">ScreenFlow</Link>
           <CardTitle>Create your account</CardTitle>
