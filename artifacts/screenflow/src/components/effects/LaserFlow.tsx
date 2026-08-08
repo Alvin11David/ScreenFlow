@@ -584,6 +584,7 @@ export function LaserFlow(props: LaserFlowProps) {
     props.falloffStart,
     props.fogFallSpeed,
     props.color,
+    props.globalScale,
   ]);
 
   return (
