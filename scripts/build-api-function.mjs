@@ -2,13 +2,15 @@ import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+
 // Some plugins (e.g. esbuild) may use `require` to resolve dependencies
 globalThis.require = createRequire(import.meta.url);
-const require = globalThis.require;
+
+// Resolve esbuild from the api-server workspace (it declares esbuild as a devDependency)
+const require = createRequire(path.join(rootDir, "artifacts", "api-server", "package.json"));
 
 const { build } = require("esbuild");
-
-const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 async function main() {
   await build({
