@@ -1,9 +1,8 @@
 import { Router, type IRouter } from "express";
-import { db, videosTable, videoSharesTable, videoAnalyticsTable, usersTable } from "@workspace/db";
-import { eq, and, desc, count, sql } from "drizzle-orm";
-import crypto from "node:crypto";
-import { CreateVideoBody, UpdateVideoBody, CreateShareLinkBody, RecordAnalyticsBody } from "@workspace/api-zod";
-import { requireAuth, optionalAuth, type AuthenticatedRequest } from "../middlewares/auth";
+import { db, videosTable } from "@workspace/db";
+import { eq, and, desc, count } from "drizzle-orm";
+import { CreateVideoBody, UpdateVideoBody } from "@workspace/api-zod";
+import { requireAuth, type AuthenticatedRequest } from "../middlewares/auth";
 
 const router: IRouter = Router();
 
@@ -34,9 +33,21 @@ router.post("/", requireAuth, async (req: AuthenticatedRequest, res) => {
     return;
   }
 
+  const { title, description, fileUrl, thumbnailUrl, duration, fileSize, resolution, status } = parsed.data;
+
   const [video] = await db
     .insert(videosTable)
-    .values({ userId: req.userId!, title: parsed.data.title, description: parsed.data.description ?? null })
+    .values({
+      userId: req.userId!,
+      title,
+      description: description ?? null,
+      fileUrl: fileUrl ?? null,
+      thumbnailUrl: thumbnailUrl ?? null,
+      duration: duration ?? null,
+      fileSize: fileSize ?? null,
+      resolution: resolution ?? null,
+      status: status ?? undefined,
+    })
     .returning();
 
   res.status(201).json({ video });
@@ -90,110 +101,6 @@ router.delete("/:id", requireAuth, async (req: AuthenticatedRequest, res) => {
   }
 
   res.json({ message: "Video deleted" });
-});
-
-router.post("/:id/share", requireAuth, async (req: AuthenticatedRequest, res) => {
-  const videoId = Number(req.params.id);
-
-  const [video] = await db
-    .select()
-    .from(videosTable)
-    .where(and(eq(videosTable.id, videoId), eq(videosTable.userId, req.userId!)))
-    .limit(1);
-
-  if (!video) {
-    res.status(404).json({ error: "Video not found" });
-    return;
-  }
-
-  const parsed = CreateShareLinkBody.safeParse(req.body);
-  const shareToken = crypto.randomBytes(24).toString("hex");
-
-  let expiresAt: Date | undefined;
-  if (parsed.success && parsed.data.expiresInHours) {
-    expiresAt = new Date();
-    expiresAt.setHours(expiresAt.getHours() + parsed.data.expiresInHours);
-  }
-
-  await db.insert(videoSharesTable).values({
-    videoId,
-    shareToken,
-    password: parsed.success ? (parsed.data.password ?? null) : null,
-    expiresAt: expiresAt ?? null,
-  });
-
-  const url = `/videos/shared/${shareToken}`;
-  res.json({ token: shareToken, url });
-});
-
-router.get("/shared/:token", optionalAuth, async (req: AuthenticatedRequest, res) => {
-  const [share] = await db
-    .select()
-    .from(videoSharesTable)
-    .where(eq(videoSharesTable.shareToken, req.params.token as string))
-    .limit(1);
-
-  if (!share || (share.expiresAt && share.expiresAt < new Date())) {
-    res.status(404).json({ error: "Share link not found or expired" });
-    return;
-  }
-
-  const [video] = await db
-    .select()
-    .from(videosTable)
-    .where(eq(videosTable.id, share.videoId))
-    .limit(1);
-
-  if (!video) {
-    res.status(404).json({ error: "Video not found" });
-    return;
-  }
-
-  const [owner] = await db
-    .select({
-      id: usersTable.id,
-      email: usersTable.email,
-      name: usersTable.name,
-      avatarUrl: usersTable.avatarUrl,
-      role: usersTable.role,
-      createdAt: usersTable.createdAt,
-    })
-    .from(usersTable)
-    .where(eq(usersTable.id, video.userId))
-    .limit(1);
-
-  res.json({ video, owner });
-});
-
-router.post("/:id/analytics", async (req, res) => {
-  const videoId = Number(req.params.id);
-  const parsed = RecordAnalyticsBody.safeParse(req.body);
-  if (!parsed.success) {
-    res.status(400).json({ error: "Invalid analytics data" });
-    return;
-  }
-
-  const [video] = await db
-    .select({ id: videosTable.id })
-    .from(videosTable)
-    .where(eq(videosTable.id, videoId))
-    .limit(1);
-
-  if (!video) {
-    res.status(404).json({ error: "Video not found" });
-    return;
-  }
-
-  await db.insert(videoAnalyticsTable).values({
-    videoId,
-    watchedSeconds: parsed.data.watchedSeconds,
-    totalDuration: parsed.data.totalDuration,
-    referrer: parsed.data.referrer ?? null,
-    viewerIp: req.ip ?? null,
-    userAgent: req.headers["user-agent"] ?? null,
-  });
-
-  res.json({ message: "Analytics recorded" });
 });
 
 export default router;
