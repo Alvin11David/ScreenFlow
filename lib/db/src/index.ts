@@ -20,9 +20,13 @@ function getPool(): pg.Pool {
 
 export const pool = new Proxy({} as pg.Pool, {
   get(_target, prop, receiver) {
+    if (prop === "constructor") return Object;
     const real = getPool();
     const value = Reflect.get(real, prop, receiver);
     return typeof value === "function" ? value.bind(real) : value;
+  },
+  getPrototypeOf() {
+    return pg.Pool.prototype;
   },
 });
 
