@@ -60,6 +60,12 @@ export default defineConfig({
     ...(port ? { port, strictPort: true } : {}),
     host: "0.0.0.0",
     allowedHosts: true,
+    proxy: {
+      "/api": {
+        target: "https://screenflow-api-production-0196.up.railway.app",
+        changeOrigin: true,
+      },
+    },
     fs: {
       strict: true,
     },
