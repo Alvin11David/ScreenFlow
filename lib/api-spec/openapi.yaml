@@ -41,6 +41,7 @@ paths:
       operationId: healthCheck
       tags: [health]
       summary: Health check
+      security: []
       responses:
         "200":
           description: Healthy
@@ -54,6 +55,7 @@ paths:
       operationId: register
       tags: [auth]
       summary: Register a new user
+      security: []
       requestBody:
         required: true
         content:
@@ -79,6 +81,7 @@ paths:
       operationId: login
       tags: [auth]
       summary: Login
+      security: []
       requestBody:
         required: true
         content:
@@ -104,6 +107,7 @@ paths:
       operationId: logout
       tags: [auth]
       summary: Logout
+      security: []
       responses:
         "200":
           description: Logged out
