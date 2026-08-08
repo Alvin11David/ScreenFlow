@@ -43,6 +43,7 @@ const DEFAULT_PROPS = {
   falloffStart: 1.2,
   fogFallSpeed: 0.6,
   color: "#A0FFBC",
+  globalScale: 0.4,
 };
 
 const VERT = `
@@ -79,6 +80,7 @@ uniform float uFalloffStart;
 uniform float uFogFallSpeed;
 uniform vec3 uColor;
 uniform float uFade;
+uniform float uGlobalScale;
 
 // Core beam/flare shaping and dynamics
 #define PI 3.14159265359
