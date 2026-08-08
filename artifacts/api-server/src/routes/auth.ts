@@ -135,8 +135,19 @@ router.post("/verify-reset-code", authRateLimit, async (req, res) => {
     return;
   }
 
-  const token = await createPasswordResetToken(user.id, user.email);
-  const expectedCode = token.slice(0, 5).toUpperCase();
+  const [record] = await db
+    .select()
+    .from(passwordResetTokensTable)
+    .where(eq(passwordResetTokensTable.userId, user.id))
+    .orderBy(passwordResetTokensTable.createdAt)
+    .limit(1);
+
+  if (!record) {
+    res.status(400).json({ error: "Invalid code" });
+    return;
+  }
+
+  const expectedCode = record.token.slice(0, 5).toUpperCase();
 
   if (code !== expectedCode) {
     res.status(400).json({ error: "Invalid code" });
