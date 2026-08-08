@@ -44,6 +44,17 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    rollupOptions: {
+      onwarn(warning, defaultHandler) {
+        if (
+          warning.code === "SOURCEMAP_ERROR" &&
+          warning.message.includes("resolve original location")
+        ) {
+          return;
+        }
+        defaultHandler(warning);
+      },
+    },
   },
   server: {
     ...(port ? { port, strictPort: true } : {}),
