@@ -584,7 +584,7 @@ export function LaserFlow(props: LaserFlowProps) {
   return (
     <div
       ref={mountRef}
-      className={`w-full h-full relative ${props.className ?? ""}`}
+      className={`w-full h-full ${/\b(?:absolute|fixed|relative|static|sticky)\b/.test(props.className ?? "") ? "" : "relative "}${props.className ?? ""}`}
       style={props.style}
     />
   );
