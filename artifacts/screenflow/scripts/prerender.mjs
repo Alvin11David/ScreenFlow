@@ -23,7 +23,7 @@ function extractAssetTags(template) {
   return tags;
 }
 
-function buildHead({ seoRoutes, SITE_URL }, route) {
+function buildHead(assetTags, route) {
   const url = SITE_URL + (route.path === "/" ? "/" : route.path);
   const image = `${SITE_URL}/opengraph.jpg`;
   const robots = route.noindex
