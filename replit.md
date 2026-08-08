@@ -38,7 +38,9 @@ _Populate as you build — explicit user instructions worth remembering across s
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- **Vercel deployment**: the domain serves the static Vite build from `artifacts/screenflow/dist/public` and routes `/api/*` to the Express app. The deployable is a pre-bundled, self-contained `api/index.mjs` (esbuild from `api/_entry.ts`, run via `node scripts/build-api-function.mjs`). Vercel's Node runtime transpiles `api/*.ts` per-file and does **not** resolve directory/extensionless relative imports (`import router from "./routes"` crashes with `ERR_UNSUPPORTED_DIR_IMPORT`), so never point Vercel at `artifacts/api-server/src` directly. Regenerate the bundle after any api-server change: `node scripts/build-api-function.mjs` (this is part of the `vercel.json` `buildCommand`).
+- **`DATABASE_URL`**: required by `/api/auth`, `/api/videos`, `/api/teams`, `/api/subscriptions`. Without it the Vercel function still boots (healthz/stats work) but those endpoints fail. Set it in the Vercel project env vars to a Postgres/Neon connection string.
+- Runtime deps the function bundle externalizes (express, pg, drizzle-orm, pino, ...) are declared at the repo root `package.json` so Vercel's function tracer can resolve them.
 
 ## Pointers
 
