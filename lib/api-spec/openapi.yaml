@@ -671,6 +671,7 @@ components:
         email:
           type: string
           format: email
+          maxLength: 255
       required:
         - email
 
