@@ -49,6 +49,20 @@ const service = ts.createLanguageService(serviceHost);
 const program = service.getProgram();
 const diagnostics = ts.getPreEmitDiagnostics(program);
 
+console.log("=== moduleResolution:", config.options.moduleResolution, "customConditions:", config.options.customConditions, "types:", config.options.types, "skipLibCheck:", config.options.skipLibCheck, "noEmitOnError:", config.options.noEmitOnError, "strict:", config.options.strict === undefined ? "(inherited)" : config.options.strict, "esModuleInterop:", config.options.esModuleInterop, "allowSyntheticDefaultImports:", config.options.allowSyntheticDefaultImports);
+
+for (const [fromFile, mod] of [
+  ["src/app.ts", "express"],
+  ["src/app.ts", "@types/express"],
+  ["src/lib/auth.ts", "drizzle-orm"],
+  ["src/lib/auth.ts", "@workspace/db"],
+  ["src/routes/health.ts", "@workspace/api-zod"],
+]) {
+  const from = ts.sys.resolvePath(`${cwd}/${fromFile}`);
+  const r = ts.resolveModuleName(mod, from, config.options, ts.sys);
+  console.log(`${fromFile} -> ${mod} =>`, r.resolvedModule && r.resolvedModule.resolvedFileName);
+}
+
 console.log("=== Pre-emit diagnostics ===");
 for (const d of diagnostics) {
   const msg = ts.flattenDiagnosticMessageText(d.messageText, "\n");
