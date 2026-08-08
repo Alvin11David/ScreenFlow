@@ -3,7 +3,7 @@
   "buildCommand": "pnpm --filter @workspace/screenflow run build && node \"$(git rev-parse --show-toplevel)/scripts/build-api-function.mjs\"",
   "outputDirectory": "artifacts/screenflow/dist/public",
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/api/(.*)", "destination": "/api/index" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
