@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Command } from "cmdk";
 import { Search, Laptop, Settings, CreditCard, User, HelpCircle, LogOut } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { APP_URL } from "@/lib/utils";
 
 export function CommandPalette() {
   const [open, setOpen] = useState(false);
@@ -41,12 +42,11 @@ export function CommandPalette() {
                 className="flex cursor-pointer items-center rounded-sm px-2 py-2.5 text-sm hover:bg-white/10 aria-selected:bg-white/10 transition-colors"
                 onSelect={() => {
                   close();
-                  window.open("https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing", "_blank", "noopener,noreferrer");
-                  window.location.href = "/thanks";
+                  window.open(APP_URL, "_blank", "noopener,noreferrer");
                 }}
               >
                 <Laptop className="mr-2 h-4 w-4" />
-                <span>Download ScreenFlow</span>
+                <span>Go to ScreenFlow App</span>
               </Command.Item>
               <Command.Item
                 className="flex cursor-pointer items-center rounded-sm px-2 py-2.5 text-sm hover:bg-white/10 aria-selected:bg-white/10 transition-colors"

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Check, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { APP_URL } from "@/lib/utils";
 
 const plans = [
   {
@@ -128,8 +129,7 @@ export function Pricing() {
                 data-testid={`button-plan-${plan.name.toLowerCase()}`}
                 onClick={() => {
                   if (plan.name === "Free") {
-                    window.open("https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing", "_blank", "noopener,noreferrer");
-                    window.location.href = "/thanks";
+                    window.open(APP_URL, "_blank", "noopener,noreferrer");
                   } else {
                     window.location.href = "/register";
                   }

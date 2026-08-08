@@ -1,6 +1,8 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
+export const APP_URL = "https://screen-recorder-v0-1.vercel.app/";
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }

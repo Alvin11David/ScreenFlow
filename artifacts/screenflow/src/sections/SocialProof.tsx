@@ -50,7 +50,8 @@ function CountUp({ target, suffix, decimals }: { target: number; suffix: string;
 
 export function SocialProof() {
   const { data: statsData } = useGetStats();
-  const stats = statsData ?? fallbackStats;
+  const stats =
+    statsData && typeof statsData === "object" ? statsData : fallbackStats;
 
   return (
     <section className="py-20 border-y border-border bg-muted/20 overflow-hidden">

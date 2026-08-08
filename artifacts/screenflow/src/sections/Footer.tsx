@@ -2,7 +2,7 @@ const footerLinks: Record<string, Array<{ label: string; href: string }>> = {
   Product: [
     { label: "Features", href: "/#features" },
     { label: "Pricing", href: "/#pricing" },
-    { label: "Download", href: "https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing" },
+    { label: "ScreenFlow App", href: "https://screen-recorder-v0-1.vercel.app/" },
     { label: "Changelog", href: "/#blog" },
     { label: "Roadmap", href: "/#features" },
   ],

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useTheme } from "@/components/ThemeProvider";
 import { useAuth } from "@/hooks/use-auth";
+import { APP_URL } from "@/lib/utils";
 
 export function Navbar() {
   const { user } = useAuth();
@@ -82,14 +83,13 @@ export function Navbar() {
             <a href="/login" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Sign in</a>
           )}
           <Button
-            data-testid="button-download-nav"
+            data-testid="button-go-to-app-nav"
             onClick={() => {
-              window.open("https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing", "_blank", "noopener,noreferrer");
-              window.location.href = "/thanks";
+              window.open(APP_URL, "_blank", "noopener,noreferrer");
             }}
             className="bg-foreground text-background hover:bg-foreground/90 rounded-full px-6"
           >
-            Download
+            Go to ScreenFlow App
           </Button>
         </div>
 
@@ -125,12 +125,11 @@ export function Navbar() {
                 <div className="flex flex-col gap-3">
                   <Button
                     onClick={() => {
-                      window.open("https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing", "_blank", "noopener,noreferrer");
-                      window.location.href = "/thanks";
+                      window.open(APP_URL, "_blank", "noopener,noreferrer");
                     }}
                     className="w-full justify-center bg-foreground text-background hover:bg-foreground/90"
                   >
-                    Download for free
+                    Go to ScreenFlow App
                   </Button>
                 </div>
               </div>

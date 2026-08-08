@@ -1,22 +1,7 @@
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Play, Download } from "lucide-react";
+import { Play, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getOS } from "@/lib/utils";
-
-function useClientOS() {
-  const [os, setOs] = useState<"mac" | "windows" | "linux" | null>(null);
-  useEffect(() => { setOs(getOS()); }, []);
-  return os;
-}
-
-function DownloadPlatformName() {
-  const os = useClientOS();
-  if (os === "mac") return <>Mac</>;
-  if (os === "windows") return <>Windows</>;
-  if (os === "linux") return <>Linux</>;
-  return null;
-}
+import { APP_URL } from "@/lib/utils";
 
 const waveHeights = [30,55,42,78,52,68,38,88,62,48,72,44,82,58,36,68,52,76,43,62,88,48,66,38,77,57,52,71,43,82,34,64,50,74,45,60,85,48,66,40];
 
@@ -252,15 +237,14 @@ export function Hero() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button
               size="lg"
-              data-testid="button-download-mac"
+              data-testid="button-go-to-app"
               onClick={() => {
-                window.open("https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing", "_blank", "noopener,noreferrer");
-                window.location.href = "/thanks";
+                window.open(APP_URL, "_blank", "noopener,noreferrer");
               }}
               className="btn-glow rounded-full px-8 h-14 text-base gap-2 w-full sm:w-auto bg-foreground text-background hover:bg-foreground/90 transition-all duration-300"
             >
-              <Download className="w-5 h-5" />
-              Download for <DownloadPlatformName />
+              <ExternalLink className="w-5 h-5" />
+              Go to ScreenFlow App
             </Button>
             <Button
               size="lg"
@@ -274,7 +258,7 @@ export function Hero() {
             </Button>
           </div>
           <p className="mt-4 text-sm text-muted-foreground">
-            Also available for Windows and Linux. Free to start.
+            Also available for Windows, Mac OS and Linux | Android and IOS phones. Free to start.
           </p>
         </motion.div>
 

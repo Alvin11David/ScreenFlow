@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Navbar } from "@/sections/Navbar";
 import { Footer } from "@/sections/Footer";
+import { APP_URL } from "@/lib/utils";
 
 export default function ThankYou() {
   return (
@@ -72,14 +73,14 @@ export default function ThankYou() {
                   transition={{ delay: 0.4 }}
                   className="text-lg text-muted-foreground mb-6 leading-relaxed"
                 >
-                  Your download has started. If it doesn't begin automatically,{" "}
+                  Open ScreenFlow in your browser to start recording:{" "}
                   <a
-                    href="https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing"
+                    href={APP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-primary hover:text-primary/80 underline transition-colors"
                   >
-                    click here to retry
+                    Launch ScreenFlow App
                   </a>.
                 </motion.p>
 
@@ -90,7 +91,7 @@ export default function ThankYou() {
                   className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-10"
                 >
                   <Download className="w-4 h-4" />
-                  <span>ScreenFlow — 120 MB</span>
+                  <span>ScreenFlow — web app</span>
                 </motion.div>
 
                 <motion.div
@@ -111,11 +112,11 @@ export default function ThankYou() {
                   <Button
                     size="lg"
                     variant="outline"
-                    onClick={() => window.open("https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing", "_blank", "noopener,noreferrer")}
+                    onClick={() => window.open(APP_URL, "_blank", "noopener,noreferrer")}
                     className="rounded-full px-8 h-14 text-base gap-2 border-foreground/20 dark:border-white/20 hover:bg-muted dark:hover:bg-white/5 bg-transparent text-foreground transition-all duration-300"
                   >
                     <Download className="w-5 h-5" />
-                    Download Again
+                    Open ScreenFlow App
                   </Button>
                 </motion.div>
               </div>

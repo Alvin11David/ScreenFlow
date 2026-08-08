@@ -1,42 +1,9 @@
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Monitor, Apple, Terminal, ArrowRight } from "lucide-react";
+import { ExternalLink, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getOS } from "@/lib/utils";
-
-function useClientOS() {
-  const [os, setOs] = useState<"mac" | "windows" | "linux" | null>(null);
-  useEffect(() => { setOs(getOS()); }, []);
-  return os;
-}
-
-const allPlatforms = [
-  {
-    os: "mac",
-    icon: Apple,
-    label: "Download for Mac",
-    sub: "macOS 11.0+, Universal",
-    testId: "button-download-mac-cta",
-  },
-  {
-    os: "windows",
-    icon: Monitor,
-    label: "Download for Windows",
-    sub: "Windows 10+, 64-bit",
-    testId: "button-download-windows",
-  },
-  {
-    os: "linux",
-    icon: Terminal,
-    label: "Download for Linux",
-    sub: "Debian, Ubuntu, Arch",
-    testId: "button-download-linux",
-  },
-];
+import { APP_URL } from "@/lib/utils";
 
 export function DownloadSection() {
-  const os = useClientOS();
-  const platforms = allPlatforms.toSorted((a) => (a.os === os ? -1 : 0));
   return (
     <section className="py-32 relative overflow-hidden">
       {/* Background blobs */}
@@ -91,33 +58,17 @@ export function DownloadSection() {
               transition={{ delay: 0.3 }}
               className="flex flex-col sm:flex-row justify-center gap-4 mb-10"
             >
-              {platforms.map((p) => {
-                const Icon = p.icon;
-                return (
-                  <Button
-                    key={p.label}
-                    size="lg"
-                    data-testid={p.testId}
-                    onClick={() => {
-                      window.open("https://drive.google.com/file/d/1jfcLFfD39XIuFoYtV6-fFP_C8NvHHtEa/view?usp=sharing", "_blank", "noopener,noreferrer");
-                      window.location.href = "/thanks";
-                    }}
-                    className={`rounded-full px-7 h-14 text-sm font-semibold gap-2.5 flex flex-col items-center justify-center h-auto py-3 ${
-                      p.os === os
-                        ? "bg-foreground text-background hover:bg-foreground/90"
-                        : "bg-muted border border-border hover:bg-muted/80 text-foreground"
-                    }`}
-                  >
-                    <span className="flex items-center gap-2">
-                      <Icon className="w-4 h-4" />
-                      {p.label}
-                    </span>
-                    <span className={`text-xs font-normal ${p.os === os ? "opacity-60" : "text-muted-foreground"}`}>
-                      {p.sub}
-                    </span>
-                  </Button>
-                );
-              })}
+              <Button
+                size="lg"
+                data-testid="button-go-to-app-cta"
+                onClick={() => {
+                  window.open(APP_URL, "_blank", "noopener,noreferrer");
+                }}
+                className="rounded-full px-8 h-14 text-base gap-2 bg-foreground text-background hover:bg-foreground/90 transition-all duration-300"
+              >
+                <ExternalLink className="w-5 h-5" />
+                Go to ScreenFlow App
+              </Button>
             </motion.div>
 
             <motion.div
