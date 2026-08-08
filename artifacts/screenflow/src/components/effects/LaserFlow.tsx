@@ -199,7 +199,7 @@ uniform float uGlobalScale;
 
 void mainImage(out vec4 fc,in vec2 frag){
     vec2 C=iResolution.xy*.5; float invW=1.0/max(C.x,1.0);
-    float sc=512.0/iResolution.x*.4;
+    float sc=512.0/iResolution.x*uGlobalScale;
     vec2 uv=(frag-C)*sc,off=vec2(uBeamXFrac*iResolution.x*sc,uBeamYFrac*iResolution.y*sc);
     vec2 uvc = uv - off;
     float a=0.0,b=0.0;
@@ -371,6 +371,7 @@ export function LaserFlow(props: LaserFlowProps) {
       uFogFallSpeed: { value: settings.fogFallSpeed },
       uColor: { value: new THREE.Vector3(r, g, b) },
       uFade: { value: hasFadedRef.current ? 1 : 0 },
+      uGlobalScale: { value: settings.globalScale },
     };
     uniformsRef.current = uniforms;
 
@@ -562,6 +563,7 @@ export function LaserFlow(props: LaserFlowProps) {
     uniforms.uDecay.value = props.decay ?? DEFAULT_PROPS.decay;
     uniforms.uFalloffStart.value = props.falloffStart ?? DEFAULT_PROPS.falloffStart;
     uniforms.uFogFallSpeed.value = props.fogFallSpeed ?? DEFAULT_PROPS.fogFallSpeed;
+    uniforms.uGlobalScale.value = props.globalScale ?? DEFAULT_PROPS.globalScale;
 
     const { r, g, b } = hexToRGB(props.color ?? DEFAULT_PROPS.color);
     (uniforms.uColor.value as THREE.Vector3).set(r, g, b);
