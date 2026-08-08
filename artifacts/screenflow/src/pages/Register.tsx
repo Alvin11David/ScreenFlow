@@ -3,7 +3,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { LaserFlow } from "@/components/effects/LaserFlow";
+import { ArrowLeft } from "lucide-react";
 import { Link, useLocation } from "wouter";
 
 const LASER_COLOR = "#22D3EE";
@@ -39,6 +39,12 @@ export default function Register() {
         <Card className="w-full max-w-md border-2 bg-card/80 backdrop-blur-md" style={{ borderColor: LASER_COLOR }}>
         <CardHeader className="text-center">
           <Link href="/" className="text-2xl font-bold text-foreground mb-2 block">ScreenFlow</Link>
+          <div className="flex justify-center mb-2">
+            <Link href="/login" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors">
+              <ArrowLeft className="h-4 w-4 mr-1" />
+              Back
+            </Link>
+          </div>
           <CardTitle>Create your account</CardTitle>
           <CardDescription>Start recording and sharing in minutes</CardDescription>
         </CardHeader>

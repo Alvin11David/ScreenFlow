@@ -39,6 +39,12 @@ export default function Login() {
         <Card className="w-full max-w-md border-2 bg-card/80 backdrop-blur-md" style={{ borderColor: SILK_COLOR }}>
         <CardHeader className="text-center">
           <Link href="/" className="text-2xl font-bold text-foreground mb-2 block">ScreenFlow</Link>
+          <div className="flex justify-center mb-2">
+            <Link href="/" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors">
+              <ArrowLeft className="h-4 w-4 mr-1" />
+              Back
+            </Link>
+          </div>
           <CardTitle>Welcome back</CardTitle>
           <CardDescription>Sign in to your account</CardDescription>
         </CardHeader>
