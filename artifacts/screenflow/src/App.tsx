@@ -10,7 +10,6 @@ import ThankYou from "@/pages/ThankYou";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 import Dashboard from "@/pages/Dashboard";
-import VideoPlayer from "@/pages/VideoPlayer";
 import LandingPage from "@/pages/LandingPage";
 import { landingPages } from "@/lib/content";
 
@@ -24,7 +23,6 @@ function Router() {
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/dashboard" component={Dashboard} />
-      <Route path="/videos/shared/:token" component={VideoPlayer} />
       {landingPages.map((page) => (
         <Route key={page.path} path={page.path}>
           <LandingPage path={page.path} />
