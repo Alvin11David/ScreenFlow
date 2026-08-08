@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Grainient } from "@/components/effects/Grainient";
+import { ArrowLeft } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 
@@ -97,6 +98,12 @@ export default function ForgotPassword() {
         <Card className="w-full max-w-md border-2 bg-card/80 backdrop-blur-md" style={{ borderColor: GRAINIENT_COLORS.color2 }}>
           <CardHeader className="text-center">
             <Link href="/" className="text-2xl font-bold text-foreground mb-2 block">ScreenFlow</Link>
+            <div className="flex justify-center mb-2">
+              <Link href="/login" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <ArrowLeft className="h-4 w-4 mr-1" />
+                Back
+              </Link>
+            </div>
             <CardTitle>
               {verified ? "Password Reset" : emailSent ? "Enter Code" : "Forgot Password"}
             </CardTitle>
