@@ -9,4 +9,6 @@ import type { User } from './user';
 
 export interface AuthResponse {
   user: User;
+  /** Session token. Use as Authorization: Bearer <token> for cross-origin clients (e.g. the recorder app). */
+  token?: string;
 }
