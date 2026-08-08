@@ -3,7 +3,10 @@ import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { LaserFlow } from "@/components/effects/LaserFlow";
 import { Link, useLocation } from "wouter";
+
+const LASER_COLOR = "#22D3EE";
 
 export default function Register() {
   const { register } = useAuth();
