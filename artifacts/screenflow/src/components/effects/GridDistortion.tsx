@@ -284,7 +284,7 @@ export function GridDistortion({
       container.removeEventListener("mouseleave", handleMouseLeave);
       cleanup();
     };
-  }, [grid, mouse, strength, relaxation, imageSrc, cleanup]);
+  }, [grid, mouse, strength, relaxation, imageSrc, color, cleanup]);
 
   return (
     <div
