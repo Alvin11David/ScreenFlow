@@ -92,6 +92,9 @@ export function Silk({
   const cameraRef = useRef<Camera | null>(null);
   const rafRef = useRef<number>(0);
 
+  const propsRef = useRef({ speed, scale, color, noiseIntensity, rotation });
+  propsRef.current = { speed, scale, color, noiseIntensity, rotation };
+
   const hexToNormalizedRGB = (hex: string): [number, number, number] => {
     const clean = hex.replace("#", "");
     const r = parseInt(clean.slice(0, 2), 16) / 255;
@@ -197,12 +200,13 @@ export function Silk({
       lastTime = t;
 
       if (program && mesh && camera) {
+        const p = propsRef.current;
         program.uniforms.uTime.value += 0.1 * deltaTime;
-        program.uniforms.uSpeed.value = speed;
-        program.uniforms.uScale.value = scale;
-        program.uniforms.uNoiseIntensity.value = noiseIntensity;
-        program.uniforms.uColor.value = hexToNormalizedRGB(color);
-        program.uniforms.uRotation.value = rotation;
+        program.uniforms.uSpeed.value = p.speed;
+        program.uniforms.uScale.value = p.scale;
+        program.uniforms.uNoiseIntensity.value = p.noiseIntensity;
+        program.uniforms.uColor.value = hexToNormalizedRGB(p.color);
+        program.uniforms.uRotation.value = p.rotation;
         renderer.render({ scene: mesh, camera });
       }
     };
