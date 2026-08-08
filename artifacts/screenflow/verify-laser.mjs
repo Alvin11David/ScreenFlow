@@ -2,6 +2,7 @@ import puppeteer from "puppeteer";
 
 const browser = await puppeteer.launch({
   headless: true,
+  executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe",
   args: ["--ignore-gpu-blocklist", "--enable-unsafe-swiftshader", "--enable-webgl", "--use-gl=angle"],
 });
 const page = await browser.newPage();
