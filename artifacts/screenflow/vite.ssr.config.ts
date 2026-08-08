@@ -18,6 +18,9 @@ export default defineConfig({
     ssr: true,
     rollupOptions: {
       input: path.resolve(import.meta.dirname, "src/ssr-entry.tsx"),
+      output: {
+        entryFileNames: "index.js",
+      },
       onwarn(warning, defaultHandler) {
         if (
           warning.code === "SOURCEMAP_ERROR" &&
