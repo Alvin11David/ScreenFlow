@@ -75,13 +75,8 @@ function buildHead(assetTags, route, SITE_URL) {
 function writeSitemap(distPublic, { seoRoutes, SITE_URL }) {
   const today = new Date().toISOString().slice(0, 10);
   const urls = seoRoutes
-    .filter((r) => !r.noindex && r.path === "/")
-    .concat(seoRoutes.filter((r) => !r.noindex && r.path !== "/"));
-
-  const xml = [
-    '<?xml version="1.0" encoding="UTF-8"?>',
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-    ...urls.map((route) => {
+    .filter((r) => !r.noindex)
+    .map((route) => {
       const loc = SITE_URL + (route.path === "/" ? "/" : route.path);
       const priority = route.path === "/" ? "1.0" : "0.8";
       const changefreq = route.path === "/" ? "weekly" : "monthly";
@@ -93,13 +88,30 @@ function writeSitemap(distPublic, { seoRoutes, SITE_URL }) {
         `    <priority>${priority}</priority>`,
         "  </url>",
       ].join("\n");
-    }),
+    });
+
+  const xml = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ...urls,
     "</urlset>",
     "",
   ].join("\n");
 
   fs.writeFileSync(path.join(distPublic, "sitemap.xml"), xml, "utf-8");
   console.log(`  Generated sitemap.xml (${urls.length} URLs)`);
+}
+
+function writeRobots(distPublic, { SITE_URL }) {
+  const robots = [
+    "User-agent: *",
+    "Allow: /",
+    `Sitemap: ${SITE_URL}/sitemap.xml`,
+    "",
+  ].join("\n");
+
+  fs.writeFileSync(path.join(distPublic, "robots.txt"), robots, "utf-8");
+  console.log("  Generated robots.txt");
 }
 
 function write404(distPublic, html, { SITE_URL }) {
@@ -154,6 +166,7 @@ async function prerender() {
   }
 
   writeSitemap(distPublic, { seoRoutes, SITE_URL });
+  writeRobots(distPublic, { SITE_URL });
   write404(distPublic, fs.readFileSync(path.join(distPublic, "index.html"), "utf-8"), {
     SITE_URL,
   });
