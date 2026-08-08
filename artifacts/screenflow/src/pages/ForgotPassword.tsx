@@ -34,8 +34,10 @@ export default function ForgotPassword() {
         credentials: "include",
         body: JSON.stringify({ email }),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? "Failed to send code");
+      const text = await res.text();
+      let data: Record<string, unknown> = {};
+      try { data = JSON.parse(text); } catch { /* ignore non-JSON */ }
+      if (!res.ok) throw new Error((data.error as string) ?? "Failed to send code");
       setEmailSent(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to send code");
@@ -55,8 +57,10 @@ export default function ForgotPassword() {
         credentials: "include",
         body: JSON.stringify({ email, code }),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? "Invalid code");
+      const text = await res.text();
+      let data: Record<string, unknown> = {};
+      try { data = JSON.parse(text); } catch { /* ignore non-JSON */ }
+      if (!res.ok) throw new Error((data.error as string) ?? "Invalid code");
       setVerified(true);
       setTimeout(() => navigate("/login"), 2000);
     } catch (err) {
