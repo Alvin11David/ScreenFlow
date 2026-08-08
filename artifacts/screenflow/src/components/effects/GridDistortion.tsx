@@ -44,6 +44,7 @@ export function GridDistortion({
   strength = 0.15,
   relaxation = 0.9,
   imageSrc,
+  color = "#ffffff",
   className,
 }: GridDistortionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
