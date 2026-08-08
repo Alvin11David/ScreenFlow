@@ -1,0 +1,13 @@
+node_modules
+**/node_modules
+**/dist
+dist
+.git
+.DS_Store
+*.log
+.vscode
+.idea
+.env
+.env.*
+pnpm-debug.log*
+artifacts/screenflow/dist
