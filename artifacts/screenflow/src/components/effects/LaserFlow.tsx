@@ -45,17 +45,16 @@ const DEFAULT_PROPS = {
 };
 
 const VERT = `
+#version 300 es
 precision highp float;
-attribute vec3 position;
+in vec3 position;
 void main(){
   gl_Position = vec4(position, 1.0);
 }
 `;
 
 const FRAG = `
-#ifdef GL_ES
-#extension GL_OES_standard_derivatives : enable
-#endif
+#version 300 es
 precision highp float;
 precision mediump int;
 
@@ -243,11 +242,7 @@ void mainImage(out vec4 fc,in vec2 frag){
     float n=fbm2(fuv+vec2(fbm2(fuv+vec2(7.3,2.1)),fbm2(fuv+vec2(-3.7,5.9)))*0.6);
     n=pow(clamp(n,0.0,1.0),FOG_CONTRAST);
     float pixW = 1.0 / max(iResolution.y, 1.0);
-#ifdef GL_OES_standard_derivatives
     float wL = max(fwidth(L), pixW);
-#else
-    float wL = pixW;
-#endif
     float m0=pow(smoothstep(FOG_BEAM_MIN - wL, FOG_BEAM_MAX + wL, L),FOG_MASK_GAMMA);
     float bm=1.0-pow(1.0-m0,FOG_EXPAND_SHAPE); bm=mix(bm*m0,bm,FOG_EDGE_MIX);
     float yP=1.0-smoothstep(HFOG_Y_RADIUS,HFOG_Y_RADIUS+HFOG_Y_SOFT,abs(yPix));
@@ -275,11 +270,11 @@ void mainImage(out vec4 fc,in vec2 frag){
 }
 
 void main(){
-  vec4 fc;
-  mainImage(fc, gl_FragCoord.xy);
-  gl_FragColor = fc;
+  mainImage(fragColor, gl_FragCoord.xy);
 }
 `;
+
+out vec4 fragColor;
 
 type Uniforms = { [key: string]: { value: unknown } };
 
