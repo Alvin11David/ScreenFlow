@@ -1,0 +1,1 @@
+{"version":3,"file":"statsResponse.d.ts","sourceRoot":"","sources":["../../../src/generated/types/statsResponse.ts"],"names":[],"mappings":"AAAA;;;;;;GAMG;AAEH,MAAM,WAAW,aAAa;IAC5B,WAAW,EAAE,MAAM,CAAC;IACpB,aAAa,EAAE,MAAM,CAAC;IACtB,cAAc,EAAE,MAAM,CAAC;IACvB,SAAS,EAAE,MAAM,CAAC;CACnB"}
