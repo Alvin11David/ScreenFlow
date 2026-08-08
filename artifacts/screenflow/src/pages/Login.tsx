@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Silk } from "@/components/effects/Silk";
+import { ArrowLeft } from "lucide-react";
 import { Link, useLocation } from "wouter";
 
 const SILK_COLOR = "#8B5CF6";
