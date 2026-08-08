@@ -5,8 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-
-const faqs = [
+import { homeFaqs } from "@/lib/content";
   {
     question: "Does ScreenFlow work on M1/M2/M3 Macs?",
     answer:

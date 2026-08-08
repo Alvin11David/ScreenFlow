@@ -11,6 +11,8 @@ import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 import Dashboard from "@/pages/Dashboard";
 import VideoPlayer from "@/pages/VideoPlayer";
+import LandingPage from "@/pages/LandingPage";
+import { landingPages } from "@/lib/content";
 
 const queryClient = new QueryClient();
 
@@ -23,18 +25,26 @@ function Router() {
       <Route path="/register" component={Register} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/videos/shared/:token" component={VideoPlayer} />
+      {landingPages.map((page) => (
+        <Route key={page.path} path={page.path}>
+          <LandingPage path={page.path} />
+        </Route>
+      ))}
       <Route component={NotFound} />
     </Switch>
   );
 }
 
-function App() {
+function App({ ssrPath }: { ssrPath?: string }) {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="screenflow-theme">
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <TooltipProvider>
-            <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+            <WouterRouter
+              base={import.meta.env.BASE_URL.replace(/\/$/, "")}
+              ssrPath={ssrPath}
+            >
               <Router />
             </WouterRouter>
             <Toaster />
