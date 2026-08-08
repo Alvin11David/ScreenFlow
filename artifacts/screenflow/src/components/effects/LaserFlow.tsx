@@ -522,7 +522,6 @@ export function LaserFlow(props: LaserFlowProps) {
       adjustDprIfNeeded(performance.now());
     };
 
-    let emaDt = 16.7;
     animate();
 
     return () => {
