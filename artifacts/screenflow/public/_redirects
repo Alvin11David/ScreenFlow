@@ -1,5 +1,0 @@
-# Prerendered routes — serve static HTML
-/thanks  /thanks/index.html  200
-
-# SPA fallback for all other routes
-/*  /index.html  200
