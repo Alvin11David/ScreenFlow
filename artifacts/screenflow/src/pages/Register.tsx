@@ -3,11 +3,13 @@ import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { LaserFlow } from "@/components/effects/LaserFlow";
+import { GridDistortion } from "@/components/effects/GridDistortion";
 import { ArrowLeft } from "lucide-react";
 import { Link, useLocation } from "wouter";
 
-const LASER_COLOR = "#22D3EE";
+const GRID_IMAGE =
+  "https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=1920&q=80";
+const GRID_COLOR = "#22D3EE";
 
 export default function Register() {
   const { register } = useAuth();
