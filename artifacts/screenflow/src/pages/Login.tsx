@@ -35,16 +35,14 @@ export default function Login() {
     <div className="fixed inset-0 overflow-hidden bg-black">
       <Silk className="absolute inset-0" color={SILK_COLOR} speed={5} scale={1} noiseIntensity={1.5} rotation={0} />
       <div className="pointer-events-none absolute inset-0 bg-black/40" />
+      <Link href="/" className="absolute top-4 left-4 z-20 inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors">
+        <ArrowLeft className="h-4 w-4 mr-1" />
+        Back
+      </Link>
       <div className="relative z-10 flex h-full items-center justify-center p-4">
         <Card className="w-full max-w-md border-2 bg-card/80 backdrop-blur-md" style={{ borderColor: SILK_COLOR }}>
         <CardHeader className="text-center">
           <Link href="/" className="text-2xl font-bold text-foreground mb-2 block">ScreenFlow</Link>
-          <div className="flex justify-center mb-2">
-            <Link href="/" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors">
-              <ArrowLeft className="h-4 w-4 mr-1" />
-              Back
-            </Link>
-          </div>
           <CardTitle>Welcome back</CardTitle>
           <CardDescription>Sign in to your account</CardDescription>
         </CardHeader>
