@@ -49,6 +49,7 @@ function buildHead(assetTags, route, SITE_URL) {
     keywords,
     robots,
     `<link rel="canonical" href="${url}" />`,
+    '<link rel="sitemap" href="/sitemap.xml" />',
     `<meta property="og:title" content="${escapeHtml(route.title)}" />`,
     `<meta property="og:description" content="${escapeHtml(route.description)}" />`,
     `<meta property="og:url" content="${url}" />`,
