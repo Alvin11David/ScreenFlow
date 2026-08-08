@@ -31,10 +31,10 @@ export default function Login() {
   }
 
   return (
-    <div className="relative min-h-dvh overflow-hidden bg-black">
+    <div className="fixed inset-0 overflow-hidden bg-black">
       <LaserFlow className="absolute inset-0" color={LASER_COLOR} horizontalBeamOffset={0.5} verticalBeamOffset={1} />
       <div className="pointer-events-none absolute inset-0 bg-black/40" />
-      <div className="relative z-10 flex min-h-dvh items-center justify-center p-4">
+      <div className="relative z-10 flex h-full items-center justify-center p-4">
         <Card className="w-full max-w-md border-2 bg-card/80 backdrop-blur-md" style={{ borderColor: LASER_COLOR }}>
         <CardHeader className="text-center">
           <Link href="/" className="text-2xl font-bold text-foreground mb-2 block">ScreenFlow</Link>

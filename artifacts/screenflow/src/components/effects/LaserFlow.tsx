@@ -144,6 +144,8 @@ uniform float uFade;
 #define EDGE_LUMA_T1 2.0
 #define DITHER_STRENGTH 1.0
 
+out vec4 fragColor;
+
     float g(float x){return x<=0.00031308?12.92*x:1.055*pow(x,1.0/2.4)-0.055;}
     float bs(vec2 p,vec2 q,float powr){
         float d=distance(p,q),f=powr*uFalloffStart,r=(f*f)/(d*d+EPS);
@@ -273,8 +275,6 @@ void main(){
   mainImage(fragColor, gl_FragCoord.xy);
 }
 `;
-
-out vec4 fragColor;
 
 type Uniforms = { [key: string]: { value: unknown } };
 
