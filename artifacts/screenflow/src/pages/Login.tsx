@@ -52,6 +52,9 @@ export default function Login() {
               <label className="text-sm font-medium">Password</label>
               <Input type="password" placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} required />
             </div>
+            <div className="flex items-center justify-end">
+              <Link href="/forgot-password" className="text-sm text-primary underline underline-offset-4 hover:text-primary/80">Forgot password?</Link>
+            </div>
             <Button type="submit" className="w-full" disabled={busy}>{busy ? "Signing in..." : "Sign in"}</Button>
             <p className="text-center text-sm text-muted-foreground">
               Don't have an account?{" "}
