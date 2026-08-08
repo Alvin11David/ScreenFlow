@@ -23,7 +23,7 @@ function extractAssetTags(template) {
   return tags;
 }
 
-function buildHead(assetTags, route) {
+function buildHead(assetTags, route, SITE_URL) {
   const url = SITE_URL + (route.path === "/" ? "/" : route.path);
   const image = `${SITE_URL}/opengraph.jpg`;
   const robots = route.noindex
@@ -132,7 +132,7 @@ async function prerender() {
 
   for (const route of seoRoutes) {
     const body = render(route.path);
-    const head = buildHead({ SITE_URL }, route);
+    const head = buildHead(assetTags, route, SITE_URL);
     const html = `<!DOCTYPE html>
 <html lang="en">
   <head>
