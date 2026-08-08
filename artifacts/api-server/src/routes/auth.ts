@@ -3,7 +3,7 @@ import { db, usersTable } from "@workspace/db";
 import { eq } from "drizzle-orm";
 import { RegisterBody, LoginBody } from "@workspace/api-zod";
 import { hashPassword, verifyPassword, createSession, deleteSession, getUserById, getUserByEmail } from "../lib/auth";
-import { requireAuth, type AuthenticatedRequest } from "../middlewares/auth";
+import { requireAuth, getRequestToken, type AuthenticatedRequest } from "../middlewares/auth";
 import { authRateLimit } from "../middlewares/rate-limit";
 
 const router: IRouter = Router();
@@ -66,11 +66,11 @@ router.post("/login", authRateLimit, async (req, res) => {
   });
 
   const { passwordHash: _, ...safeUser } = user;
-  res.json({ user: safeUser });
+  res.json({ user: safeUser, token });
 });
 
 router.post("/logout", async (req, res) => {
-  const token = req.cookies?.session;
+  const token = getRequestToken(req);
   if (token) {
     await deleteSession(token);
   }
