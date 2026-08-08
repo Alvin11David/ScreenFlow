@@ -49,6 +49,16 @@ const service = ts.createLanguageService(serviceHost);
 const program = service.getProgram();
 const diagnostics = ts.getPreEmitDiagnostics(program);
 
+console.log("=== Program source files ===");
+for (const f of program.getSourceFiles()) {
+  const rel = path.relative(cwd, f.fileName);
+  const lines = f.getLineStarts().length;
+  if (/app\.ts$|index\.ts$|health\.ts$|auth\.ts$/.test(rel)) {
+    console.log(`${rel} (${lines} lines)`);
+  }
+}
+const diagnostics = ts.getPreEmitDiagnostics(program);
+
 console.log("=== moduleResolution:", config.options.moduleResolution, "customConditions:", config.options.customConditions, "types:", config.options.types, "skipLibCheck:", config.options.skipLibCheck, "noEmitOnError:", config.options.noEmitOnError, "strict:", config.options.strict === undefined ? "(inherited)" : config.options.strict, "esModuleInterop:", config.options.esModuleInterop, "allowSyntheticDefaultImports:", config.options.allowSyntheticDefaultImports);
 
 for (const [fromFile, mod] of [
