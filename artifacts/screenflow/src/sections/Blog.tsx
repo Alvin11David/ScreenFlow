@@ -9,7 +9,10 @@ const posts = [
     categoryColor: "text-violet-500 bg-violet-500/10",
     date: "Oct 24, 2024",
     readTime: "6 min",
-    image: "/images/blog-1.png",
+    image: "/images/blog-1.webp",
+    width: 800,
+    height: 500,
+    link: "/screen-recording-software",
     gradient: "from-violet-500/20 to-purple-500/5",
   },
   {
@@ -19,7 +22,10 @@ const posts = [
     categoryColor: "text-cyan-500 bg-cyan-500/10",
     date: "Oct 18, 2024",
     readTime: "8 min",
-    image: "/images/blog-2.png",
+    image: "/images/blog-2.webp",
+    width: 800,
+    height: 500,
+    link: "/how-to-record-your-screen",
     gradient: "from-cyan-500/20 to-blue-500/5",
   },
   {
@@ -29,7 +35,10 @@ const posts = [
     categoryColor: "text-amber-500 bg-amber-500/10",
     date: "Oct 12, 2024",
     readTime: "4 min",
-    image: "/images/blog-3.png",
+    image: "/images/blog-3.webp",
+    width: 800,
+    height: 500,
+    link: "/screen-recorder",
     gradient: "from-amber-500/20 to-orange-500/5",
   },
 ];
@@ -90,39 +99,45 @@ export function Blog() {
               transition={{ delay: idx * 0.12, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="group cursor-pointer"
             >
-              <div className={`aspect-[16/10] rounded-2xl overflow-hidden mb-6 bg-gradient-to-br ${post.gradient} bg-muted border border-border relative`}>
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 mix-blend-overlay opacity-80"
-                />
-                {/* Category badge */}
-                <div className="absolute top-4 left-4">
-                  <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${post.categoryColor}`}>
-                    {post.category}
+              <a href={post.link} className="block">
+                <div className={`aspect-[16/10] rounded-2xl overflow-hidden mb-6 bg-gradient-to-br ${post.gradient} bg-muted border border-border relative`}>
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    width={post.width}
+                    height={post.height}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 mix-blend-overlay opacity-80"
+                  />
+                  {/* Category badge */}
+                  <div className="absolute top-4 left-4">
+                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${post.categoryColor}`}>
+                      {post.category}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
+                  <span>{post.date}</span>
+                  <span className="flex items-center gap-1">
+                    <Clock className="w-3 h-3" />
+                    {post.readTime} read
                   </span>
                 </div>
-              </div>
 
-              <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
-                <span>{post.date}</span>
-                <span className="flex items-center gap-1">
-                  <Clock className="w-3 h-3" />
-                  {post.readTime} read
-                </span>
-              </div>
+                <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors leading-snug text-foreground">
+                  {post.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {post.excerpt}
+                </p>
 
-              <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors leading-snug text-foreground">
-                {post.title}
-              </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {post.excerpt}
-              </p>
-
-              <div className="mt-4 flex items-center gap-1.5 text-sm font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                Read more
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-              </div>
+                <div className="mt-4 flex items-center gap-1.5 text-sm font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                  Read more
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </a>
             </motion.article>
           ))}
         </div>
