@@ -27,12 +27,14 @@ const fragmentShader = `
 uniform sampler2D uDataTexture;
 uniform sampler2D uTexture;
 uniform vec4 resolution;
+uniform vec3 uColor;
 varying vec2 vUv;
 
 void main() {
   vec2 uv = vUv;
   vec4 offset = texture2D(uDataTexture, vUv);
-  gl_FragColor = texture2D(uTexture, uv - 0.02 * offset.rg);
+  vec4 texColor = texture2D(uTexture, uv - 0.02 * offset.rg);
+  gl_FragColor = vec4(texColor.rgb * uColor, texColor.a);
 }
 `;
 
