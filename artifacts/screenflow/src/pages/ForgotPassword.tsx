@@ -94,16 +94,14 @@ export default function ForgotPassword() {
         zoom={0.9}
       />
       <div className="pointer-events-none absolute inset-0 bg-black/40" />
+      <Link href="/login" className="absolute top-4 left-4 z-20 inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors">
+        <ArrowLeft className="h-4 w-4 mr-1" />
+        Back
+      </Link>
       <div className="relative z-10 flex h-full items-center justify-center p-4">
         <Card className="w-full max-w-md border-2 bg-card/80 backdrop-blur-md" style={{ borderColor: GRAINIENT_COLORS.color2 }}>
           <CardHeader className="text-center">
             <Link href="/" className="text-2xl font-bold text-foreground mb-2 block">ScreenFlow</Link>
-            <div className="flex justify-center mb-2">
-              <Link href="/login" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors">
-                <ArrowLeft className="h-4 w-4 mr-1" />
-                Back
-              </Link>
-            </div>
             <CardTitle>
               {verified ? "Password Reset" : emailSent ? "Enter Code" : "Forgot Password"}
             </CardTitle>
