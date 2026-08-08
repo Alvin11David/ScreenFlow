@@ -324,7 +324,7 @@ export function LaserFlow(props: LaserFlowProps) {
       logarithmicDepthBuffer: false,
     });
 
-    const baseDpr = Math.min(settings.dpr ?? window.devicePixelRatio || 1, 2);
+    const baseDpr = Math.min(settings.dpr ?? (window.devicePixelRatio || 1), 2);
     let currentDpr = baseDpr;
 
     renderer.setPixelRatio(currentDpr);
