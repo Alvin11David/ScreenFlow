@@ -28,7 +28,7 @@ app.use(
 );
 const defaultCorsOrigins =
   "https://screen-flow-ltd.vercel.app,https://screen-recorder-v0-1.vercel.app";
-const corsOrigins = (process.env.CORS_ORIGIN ?? defaultCorsOrigins)
+const corsOrigins = (process.env.CORS_ALLOWED_ORIGINS ?? process.env.CORS_ORIGIN ?? defaultCorsOrigins)
   .split(",")
   .map((origin) => origin.trim())
   .filter(Boolean);
