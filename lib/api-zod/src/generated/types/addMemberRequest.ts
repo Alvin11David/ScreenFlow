@@ -7,5 +7,6 @@
  */
 
 export interface AddMemberRequest {
+  /** @maxLength 255 */
   email: string;
 }

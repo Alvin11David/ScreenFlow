@@ -7,5 +7,6 @@
  */
 
 export interface CreateTeamRequest {
+  /** @maxLength 255 */
   name: string;
 }

@@ -30,14 +30,19 @@ export const HealthCheckResponse = zod.object({
 /**
  * @summary Register a new user
  */
+export const registerBodyEmailMax = 255;
+
+export const registerBodyNameMax = 255;
+
 export const registerBodyPasswordMin = 8;
+export const registerBodyPasswordMax = 128;
 
 
 
 export const RegisterBody = zod.object({
-  "email": zod.string().email(),
-  "name": zod.string(),
-  "password": zod.string().min(registerBodyPasswordMin)
+  "email": zod.string().email().max(registerBodyEmailMax),
+  "name": zod.string().max(registerBodyNameMax),
+  "password": zod.string().min(registerBodyPasswordMin).max(registerBodyPasswordMax)
 })
 
 export const RegisterResponse = zod.object({
@@ -129,9 +134,29 @@ export const ListVideosResponse = zod.object({
 /**
  * @summary Create a video
  */
+export const createVideoBodyTitleMax = 255;
+
+export const createVideoBodyDescriptionMax = 5000;
+
+export const createVideoBodyDurationMin = 0;
+
+export const createVideoBodyFileSizeMin = 0;
+
+export const createVideoBodyResolutionMax = 50;
+
+export const createVideoBodyStatusMax = 50;
+
+
+
 export const CreateVideoBody = zod.object({
-  "title": zod.string(),
-  "description": zod.string().optional()
+  "title": zod.string().max(createVideoBodyTitleMax),
+  "description": zod.string().max(createVideoBodyDescriptionMax).optional(),
+  "fileUrl": zod.string().optional(),
+  "thumbnailUrl": zod.string().optional(),
+  "duration": zod.number().min(createVideoBodyDurationMin).optional(),
+  "fileSize": zod.number().min(createVideoBodyFileSizeMin).optional(),
+  "resolution": zod.string().max(createVideoBodyResolutionMax).optional(),
+  "status": zod.string().max(createVideoBodyStatusMax).optional()
 })
 
 export const CreateVideoResponse = zod.object({
@@ -186,9 +211,15 @@ export const UpdateVideoParams = zod.object({
   "id": zod.coerce.number()
 })
 
+export const updateVideoBodyTitleMax = 255;
+
+export const updateVideoBodyDescriptionMax = 5000;
+
+
+
 export const UpdateVideoBody = zod.object({
-  "title": zod.string().optional(),
-  "description": zod.string().optional(),
+  "title": zod.string().max(updateVideoBodyTitleMax).optional(),
+  "description": zod.string().max(updateVideoBodyDescriptionMax).optional(),
   "visibility": zod.enum(['private', 'public', 'team']).optional()
 })
 
@@ -224,80 +255,14 @@ export const DeleteVideoResponse = zod.object({
 
 
 /**
- * @summary Create a share link for a video
- */
-export const CreateShareLinkParams = zod.object({
-  "id": zod.coerce.number()
-})
-
-export const CreateShareLinkBody = zod.object({
-  "password": zod.string().optional(),
-  "expiresInHours": zod.number().optional()
-})
-
-export const CreateShareLinkResponse = zod.object({
-  "token": zod.string(),
-  "url": zod.string()
-})
-
-
-/**
- * @summary Get a shared video by token
- */
-export const GetSharedVideoParams = zod.object({
-  "token": zod.coerce.string()
-})
-
-export const GetSharedVideoResponse = zod.object({
-  "video": zod.object({
-  "id": zod.number(),
-  "userId": zod.number(),
-  "title": zod.string(),
-  "description": zod.string().nullish(),
-  "fileUrl": zod.string().nullish(),
-  "thumbnailUrl": zod.string().nullish(),
-  "duration": zod.number().nullish(),
-  "resolution": zod.string().nullish(),
-  "fileSize": zod.number().nullish(),
-  "status": zod.string(),
-  "visibility": zod.string(),
-  "createdAt": zod.coerce.date(),
-  "updatedAt": zod.coerce.date()
-}),
-  "owner": zod.object({
-  "id": zod.number(),
-  "email": zod.string(),
-  "name": zod.string(),
-  "avatarUrl": zod.string().nullish(),
-  "role": zod.string(),
-  "createdAt": zod.coerce.date()
-})
-})
-
-
-/**
- * @summary Record a video analytics event
- */
-export const RecordAnalyticsParams = zod.object({
-  "id": zod.coerce.number()
-})
-
-export const RecordAnalyticsBody = zod.object({
-  "watchedSeconds": zod.number(),
-  "totalDuration": zod.number(),
-  "referrer": zod.string().optional()
-})
-
-export const RecordAnalyticsResponse = zod.object({
-  "message": zod.string()
-})
-
-
-/**
  * @summary Create a team
  */
+export const createTeamBodyNameMax = 255;
+
+
+
 export const CreateTeamBody = zod.object({
-  "name": zod.string()
+  "name": zod.string().max(createTeamBodyNameMax)
 })
 
 export const CreateTeamResponse = zod.object({
@@ -367,8 +332,12 @@ export const AddTeamMemberParams = zod.object({
   "id": zod.coerce.number()
 })
 
+export const addTeamMemberBodyEmailMax = 255;
+
+
+
 export const AddTeamMemberBody = zod.object({
-  "email": zod.string().email()
+  "email": zod.string().email().max(addTeamMemberBodyEmailMax)
 })
 
 export const AddTeamMemberResponse = zod.object({

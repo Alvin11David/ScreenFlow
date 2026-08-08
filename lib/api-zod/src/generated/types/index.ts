@@ -7,9 +7,7 @@
  */
 
 export * from './addMemberRequest';
-export * from './analyticsEvent';
 export * from './authResponse';
-export * from './createShareRequest';
 export * from './createTeamRequest';
 export * from './createVideoRequest';
 export * from './errorResponse';
@@ -18,8 +16,6 @@ export * from './listVideosParams';
 export * from './loginRequest';
 export * from './messageResponse';
 export * from './registerRequest';
-export * from './sharedVideoResponse';
-export * from './shareResponse';
 export * from './statsResponse';
 export * from './subscription';
 export * from './subscriptionPlan';

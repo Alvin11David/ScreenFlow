@@ -8,7 +8,9 @@
 import type { UpdateVideoRequestVisibility } from './updateVideoRequestVisibility';
 
 export interface UpdateVideoRequest {
+  /** @maxLength 255 */
   title?: string;
+  /** @maxLength 5000 */
   description?: string;
   visibility?: UpdateVideoRequestVisibility;
 }

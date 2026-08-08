@@ -25,9 +25,14 @@ export interface StatsResponse {
 }
 
 export interface RegisterRequest {
+  /** @maxLength 255 */
   email: string;
+  /** @maxLength 255 */
   name: string;
-  /** @minLength 8 */
+  /**
+     * @minLength 8
+     * @maxLength 128
+     */
   password: string;
 }
 
@@ -54,8 +59,20 @@ export interface UserResponse {
 }
 
 export interface CreateVideoRequest {
+  /** @maxLength 255 */
   title: string;
+  /** @maxLength 5000 */
   description?: string;
+  fileUrl?: string;
+  thumbnailUrl?: string;
+  /** @minimum 0 */
+  duration?: number;
+  /** @minimum 0 */
+  fileSize?: number;
+  /** @maxLength 50 */
+  resolution?: string;
+  /** @maxLength 50 */
+  status?: string;
 }
 
 export type UpdateVideoRequestVisibility = typeof UpdateVideoRequestVisibility[keyof typeof UpdateVideoRequestVisibility];
@@ -68,7 +85,9 @@ export const UpdateVideoRequestVisibility = {
 } as const;
 
 export interface UpdateVideoRequest {
+  /** @maxLength 255 */
   title?: string;
+  /** @maxLength 5000 */
   description?: string;
   visibility?: UpdateVideoRequestVisibility;
 }
@@ -98,28 +117,8 @@ export interface VideoListResponse {
   total: number;
 }
 
-export interface CreateShareRequest {
-  password?: string;
-  expiresInHours?: number;
-}
-
-export interface ShareResponse {
-  token: string;
-  url: string;
-}
-
-export interface SharedVideoResponse {
-  video: Video;
-  owner: User;
-}
-
-export interface AnalyticsEvent {
-  watchedSeconds: number;
-  totalDuration: number;
-  referrer?: string;
-}
-
 export interface CreateTeamRequest {
+  /** @maxLength 255 */
   name: string;
 }
 
@@ -158,6 +157,7 @@ export interface TeamMemberResponse {
 }
 
 export interface AddMemberRequest {
+  /** @maxLength 255 */
   email: string;
 }
 

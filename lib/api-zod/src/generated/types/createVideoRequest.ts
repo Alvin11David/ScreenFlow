@@ -7,6 +7,18 @@
  */
 
 export interface CreateVideoRequest {
+  /** @maxLength 255 */
   title: string;
+  /** @maxLength 5000 */
   description?: string;
+  fileUrl?: string;
+  thumbnailUrl?: string;
+  /** @minimum 0 */
+  duration?: number;
+  /** @minimum 0 */
+  fileSize?: number;
+  /** @maxLength 50 */
+  resolution?: string;
+  /** @maxLength 50 */
+  status?: string;
 }
