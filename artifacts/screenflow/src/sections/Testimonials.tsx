@@ -8,7 +8,6 @@ const testimonials = [
     company: "Prisma",
     content:
       "ScreenFlow replaced three different tools in my workflow. The AI silence removal alone saves me hours every week when recording presentations.",
-    avatar: "/images/avatar-1.png",
     initials: "SJ",
     rating: 5,
     color: "from-violet-500 to-purple-600",
@@ -20,7 +19,6 @@ const testimonials = [
     company: "Vercel",
     content:
       "Finally, a screen recorder that doesn't destroy my CPU. I can record 4K and IDE tutorials without dropping a single frame.",
-    avatar: "/images/avatar-2.png",
     initials: "MC",
     rating: 5,
     color: "from-cyan-500 to-blue-600",
@@ -32,7 +30,6 @@ const testimonials = [
     company: "Linear",
     content:
       "I hit stop, paste the link in Slack, and my team is already watching it. It's fundamentally changed how we work asynchronously.",
-    avatar: "/images/avatar-3.png",
     initials: "ER",
     rating: 5,
     color: "from-pink-500 to-rose-600",
@@ -44,7 +41,6 @@ const testimonials = [
     company: "Raycast",
     content:
       "The quality bar on ScreenFlow is extraordinary. You can tell it was made by people who use it every day.",
-    avatar: "/images/avatar-1.png",
     initials: "TP",
     rating: 5,
     color: "from-amber-500 to-orange-600",
