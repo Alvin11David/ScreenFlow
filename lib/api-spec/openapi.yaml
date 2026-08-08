@@ -402,11 +402,14 @@ components:
         email:
           type: string
           format: email
+          maxLength: 255
         name:
           type: string
+          maxLength: 255
         password:
           type: string
           minLength: 8
+          maxLength: 128
       required:
         - email
         - name
@@ -469,8 +472,26 @@ components:
       properties:
         title:
           type: string
+          maxLength: 255
         description:
           type: string
+          maxLength: 5000
+        fileUrl:
+          type: string
+        thumbnailUrl:
+          type: string
+        duration:
+          type: number
+          minimum: 0
+        fileSize:
+          type: integer
+          minimum: 0
+        resolution:
+          type: string
+          maxLength: 50
+        status:
+          type: string
+          maxLength: 50
       required:
         - title
 
@@ -479,8 +500,10 @@ components:
       properties:
         title:
           type: string
+          maxLength: 255
         description:
           type: string
+          maxLength: 5000
         visibility:
           type: string
           enum: [private, public, team]
@@ -552,54 +575,12 @@ components:
         - videos
         - total
 
-    CreateShareRequest:
-      type: object
-      properties:
-        password:
-          type: string
-        expiresInHours:
-          type: integer
-
-    ShareResponse:
-      type: object
-      properties:
-        token:
-          type: string
-        url:
-          type: string
-      required:
-        - token
-        - url
-
-    SharedVideoResponse:
-      type: object
-      properties:
-        video:
-          $ref: "#/components/schemas/Video"
-        owner:
-          $ref: "#/components/schemas/User"
-      required:
-        - video
-        - owner
-
-    AnalyticsEvent:
-      type: object
-      properties:
-        watchedSeconds:
-          type: number
-        totalDuration:
-          type: number
-        referrer:
-          type: string
-      required:
-        - watchedSeconds
-        - totalDuration
-
     CreateTeamRequest:
       type: object
       properties:
         name:
           type: string
+          maxLength: 255
       required:
         - name
 
