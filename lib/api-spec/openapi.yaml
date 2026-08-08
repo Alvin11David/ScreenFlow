@@ -19,12 +19,16 @@ tags:
     description: Subscription management
   - name: stats
     description: Platform statistics
+security:
+  - bearerAuth: []
+  - cookieAuth: []
 paths:
   /stats:
     get:
       operationId: getStats
       tags: [stats]
       summary: Get public platform stats
+      security: []
       responses:
         "200":
           description: Platform statistics
@@ -354,6 +358,15 @@ paths:
                 $ref: "#/components/schemas/SubscriptionResponse"
 
 components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: session
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: session-token
   schemas:
     HealthStatus:
       type: object
@@ -432,6 +445,9 @@ components:
       properties:
         user:
           $ref: "#/components/schemas/User"
+        token:
+          type: string
+          description: Session token. Use as Authorization: Bearer <token> for cross-origin clients (e.g. the recorder app). Also set as an httpOnly session cookie for same-origin browser use.
       required:
         - user
 
