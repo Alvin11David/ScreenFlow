@@ -57,7 +57,6 @@ for (const f of program.getSourceFiles()) {
     console.log(`${rel} (${lines} lines)`);
   }
 }
-const diagnostics = ts.getPreEmitDiagnostics(program);
 
 console.log("=== moduleResolution:", config.options.moduleResolution, "customConditions:", config.options.customConditions, "types:", config.options.types, "skipLibCheck:", config.options.skipLibCheck, "noEmitOnError:", config.options.noEmitOnError, "strict:", config.options.strict === undefined ? "(inherited)" : config.options.strict, "esModuleInterop:", config.options.esModuleInterop, "allowSyntheticDefaultImports:", config.options.allowSyntheticDefaultImports);
 
