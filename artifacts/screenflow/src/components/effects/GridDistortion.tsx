@@ -117,6 +117,7 @@ export function GridDistortion({
       resolution: { value: new THREE.Vector4() },
       uTexture: { value: null as THREE.Texture | null },
       uDataTexture: { value: null as THREE.DataTexture | null },
+      uColor: { value: new THREE.Vector3(...hexToRgb(color)) },
     };
 
     const textureLoader = new THREE.TextureLoader();

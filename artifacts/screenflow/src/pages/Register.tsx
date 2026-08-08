@@ -43,6 +43,7 @@ export default function Register() {
         mouse={0.1}
         strength={0.15}
         relaxation={0.9}
+        color="#8B5CF6"
       />
       <div className="pointer-events-none absolute inset-0 bg-black/40" />
       <Link href="/login" className="absolute top-4 left-4 z-20 inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors">
