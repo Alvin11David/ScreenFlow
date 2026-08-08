@@ -7,6 +7,7 @@ interface GridDistortionProps {
   strength?: number;
   relaxation?: number;
   imageSrc: string;
+  color?: string;
   className?: string;
 }
 
