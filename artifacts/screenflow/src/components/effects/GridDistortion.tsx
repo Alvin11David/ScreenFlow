@@ -276,10 +276,7 @@ export function GridDistortion({
   return (
     <div
       ref={containerRef}
-      className={[
-        "w-full h-full relative overflow-hidden min-h-0 min-w-0",
-        className || "",
-      ].join(" ")}
+      className={["w-full h-full overflow-hidden min-h-0 min-w-0", className || ""].join(" ")}
     />
   );
 }
