@@ -24,8 +24,10 @@ export async function sendResetCodeEmail(to: string, code: string) {
       EMAILJS_SERVICE_ID,
       EMAILJS_TEMPLATE_ID,
       templateParams,
-      EMAILJS_PUBLIC_KEY,
-      EMAILJS_PRIVATE_KEY,
+      {
+        publicKey: EMAILJS_PUBLIC_KEY,
+        privateKey: EMAILJS_PRIVATE_KEY,
+      },
     );
     return response;
   } catch (error) {
