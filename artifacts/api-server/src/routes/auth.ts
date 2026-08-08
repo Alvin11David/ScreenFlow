@@ -38,7 +38,7 @@ router.post("/register", authRateLimit, async (req, res) => {
     path: "/",
   });
 
-  res.status(201).json({ user });
+  res.status(201).json({ user, token });
 });
 
 router.post("/login", authRateLimit, async (req, res) => {
