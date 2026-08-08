@@ -22,6 +22,7 @@ type LaserFlowProps = {
   falloffStart?: number;
   fogFallSpeed?: number;
   color?: string;
+  globalScale?: number;
 };
 
 const DEFAULT_PROPS = {
