@@ -1,6 +1,6 @@
 {
   "framework": "vite",
-  "buildCommand": "pnpm --filter @workspace/screenflow run build && node scripts/build-api-function.mjs",
+  "buildCommand": "pnpm --filter @workspace/screenflow run build && node \"$(git rev-parse --show-toplevel)/scripts/build-api-function.mjs\"",
   "outputDirectory": "artifacts/screenflow/dist/public",
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
