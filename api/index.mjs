@@ -12,19 +12,19 @@ var __export = (target, all) => {
     __defProp(target, name, { get: all[name], enumerable: true });
 };
 
-// artifacts/api-server/src/app.ts
+// src/app.ts
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { pinoHttp } from "pino-http";
 
-// artifacts/api-server/src/routes/index.ts
+// src/routes/index.ts
 import { Router as Router7 } from "express";
 
-// artifacts/api-server/src/routes/health.ts
+// src/routes/health.ts
 import { Router } from "express";
 
-// lib/api-zod/src/generated/api.ts
+// ../../lib/api-zod/src/generated/api.ts
 import * as zod from "zod";
 var GetStatsResponse = zod.object({
   "activeUsers": zod.number(),
@@ -329,7 +329,7 @@ var UpdateSubscriptionResponse = zod.object({
   })
 });
 
-// artifacts/api-server/src/routes/health.ts
+// src/routes/health.ts
 var router = Router();
 router.get("/healthz", (_req, res) => {
   const data = HealthCheckResponse.parse({ status: "ok" });
@@ -337,7 +337,7 @@ router.get("/healthz", (_req, res) => {
 });
 var health_default = router;
 
-// artifacts/api-server/src/routes/stats.ts
+// src/routes/stats.ts
 import { Router as Router2 } from "express";
 var router2 = Router2();
 router2.get("/stats", (_req, res) => {
@@ -350,14 +350,14 @@ router2.get("/stats", (_req, res) => {
 });
 var stats_default = router2;
 
-// artifacts/api-server/src/routes/auth.ts
+// src/routes/auth.ts
 import { Router as Router3 } from "express";
 
-// lib/db/src/index.ts
+// ../../lib/db/src/index.ts
 import { drizzle } from "drizzle-orm/node-postgres";
 import pg from "pg";
 
-// lib/db/src/schema/index.ts
+// ../../lib/db/src/schema/index.ts
 var schema_exports = {};
 __export(schema_exports, {
   insertSessionSchema: () => insertSessionSchema,
@@ -381,10 +381,10 @@ __export(schema_exports, {
   videosTable: () => videosTable
 });
 
-// lib/db/src/schema/users.ts
+// ../../lib/db/src/schema/users.ts
 import { pgTable, serial, text, timestamp, varchar } from "drizzle-orm/pg-core";
 
-// node_modules/.pnpm/drizzle-zod@0.8.3_drizzle-o_9023862330606cbd2d7b4dbe0f6a6add/node_modules/drizzle-zod/index.mjs
+// ../../node_modules/.pnpm/drizzle-zod@0.8.3_drizzle-o_9023862330606cbd2d7b4dbe0f6a6add/node_modules/drizzle-zod/index.mjs
 import { z } from "zod/v4";
 import { isTable, getTableColumns, getViewSelectedFields, is, Column, SQL, isView } from "drizzle-orm";
 var CONSTANTS = {
@@ -650,7 +650,7 @@ var createInsertSchema = (entity, refine) => {
   return handleColumns(columns, refine ?? {}, insertConditions);
 };
 
-// lib/db/src/schema/users.ts
+// ../../lib/db/src/schema/users.ts
 var usersTable = pgTable("users", {
   id: serial("id").primaryKey(),
   email: varchar("email", { length: 255 }).notNull().unique(),
@@ -673,7 +673,7 @@ var selectUserSchema = createSelectSchema(usersTable).omit({
 });
 var publicUserSchema = selectUserSchema;
 
-// lib/db/src/schema/sessions.ts
+// ../../lib/db/src/schema/sessions.ts
 import { pgTable as pgTable2, serial as serial2, integer, text as text2, timestamp as timestamp2 } from "drizzle-orm/pg-core";
 var sessionsTable = pgTable2("sessions", {
   id: serial2("id").primaryKey(),
@@ -687,7 +687,7 @@ var insertSessionSchema = createInsertSchema(sessionsTable).omit({
   createdAt: true
 });
 
-// lib/db/src/schema/videos.ts
+// ../../lib/db/src/schema/videos.ts
 import { pgTable as pgTable3, serial as serial3, integer as integer2, text as text3, timestamp as timestamp3, varchar as varchar2, doublePrecision } from "drizzle-orm/pg-core";
 var videosTable = pgTable3("videos", {
   id: serial3("id").primaryKey(),
@@ -718,7 +718,7 @@ var insertVideoSchema = createInsertSchema(videosTable).omit({
 });
 var selectVideoSchema = createSelectSchema(videosTable);
 
-// lib/db/src/schema/video-shares.ts
+// ../../lib/db/src/schema/video-shares.ts
 import { pgTable as pgTable4, serial as serial4, integer as integer3, text as text4, timestamp as timestamp4 } from "drizzle-orm/pg-core";
 var videoSharesTable = pgTable4("video_shares", {
   id: serial4("id").primaryKey(),
@@ -733,7 +733,7 @@ var insertVideoShareSchema = createInsertSchema(videoSharesTable).omit({
   createdAt: true
 });
 
-// lib/db/src/schema/video-analytics.ts
+// ../../lib/db/src/schema/video-analytics.ts
 import { pgTable as pgTable5, serial as serial5, integer as integer4, text as text5, timestamp as timestamp5, doublePrecision as doublePrecision2, varchar as varchar4 } from "drizzle-orm/pg-core";
 var videoAnalyticsTable = pgTable5("video_analytics", {
   id: serial5("id").primaryKey(),
@@ -750,7 +750,7 @@ var insertVideoAnalyticsSchema = createInsertSchema(videoAnalyticsTable).omit({
   createdAt: true
 });
 
-// lib/db/src/schema/teams.ts
+// ../../lib/db/src/schema/teams.ts
 import { pgTable as pgTable6, serial as serial6, integer as integer5, varchar as varchar5, timestamp as timestamp6 } from "drizzle-orm/pg-core";
 var teamsTable = pgTable6("teams", {
   id: serial6("id").primaryKey(),
@@ -764,7 +764,7 @@ var insertTeamSchema = createInsertSchema(teamsTable).omit({
   createdAt: true
 });
 
-// lib/db/src/schema/team-members.ts
+// ../../lib/db/src/schema/team-members.ts
 import { pgTable as pgTable7, serial as serial7, integer as integer6, varchar as varchar6, timestamp as timestamp7 } from "drizzle-orm/pg-core";
 var teamMembersTable = pgTable7("team_members", {
   id: serial7("id").primaryKey(),
@@ -778,7 +778,7 @@ var insertTeamMemberSchema = createInsertSchema(teamMembersTable).omit({
   createdAt: true
 });
 
-// lib/db/src/schema/subscriptions.ts
+// ../../lib/db/src/schema/subscriptions.ts
 import { pgTable as pgTable8, serial as serial8, integer as integer7, varchar as varchar7, timestamp as timestamp8 } from "drizzle-orm/pg-core";
 var subscriptionsTable = pgTable8("subscriptions", {
   id: serial8("id").primaryKey(),
@@ -797,7 +797,7 @@ var insertSubscriptionSchema = createInsertSchema(subscriptionsTable).omit({
   updatedAt: true
 });
 
-// lib/db/src/index.ts
+// ../../lib/db/src/index.ts
 var { Pool } = pg;
 var poolInstance;
 function getPool() {
@@ -824,7 +824,7 @@ var pool = new Proxy({}, {
 });
 var db = drizzle(pool, { schema: schema_exports });
 
-// artifacts/api-server/src/lib/auth.ts
+// src/lib/auth.ts
 import crypto from "node:crypto";
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
@@ -882,7 +882,7 @@ async function getUserByEmail(email) {
   return user ?? null;
 }
 
-// artifacts/api-server/src/middlewares/auth.ts
+// src/middlewares/auth.ts
 async function requireAuth(req, res, next) {
   const token = req.cookies?.session;
   const userId = await getSessionUserId(token);
@@ -899,7 +899,7 @@ async function optionalAuth(req, _res, next) {
   next();
 }
 
-// artifacts/api-server/src/routes/auth.ts
+// src/routes/auth.ts
 var router3 = Router3();
 router3.post("/register", async (req, res) => {
   const parsed = RegisterBody.safeParse(req.body);
@@ -966,7 +966,7 @@ router3.get("/me", requireAuth, async (req, res) => {
 });
 var auth_default = router3;
 
-// artifacts/api-server/src/routes/videos.ts
+// src/routes/videos.ts
 import { Router as Router4 } from "express";
 import { eq as eq2, and, desc, count } from "drizzle-orm";
 import crypto2 from "node:crypto";
@@ -1084,7 +1084,7 @@ router4.post("/:id/analytics", async (req, res) => {
 });
 var videos_default = router4;
 
-// artifacts/api-server/src/routes/teams.ts
+// src/routes/teams.ts
 import { Router as Router5 } from "express";
 import { eq as eq3, and as and2 } from "drizzle-orm";
 var router5 = Router5();
@@ -1198,7 +1198,7 @@ router5.delete("/:id/members/:userId", requireAuth, async (req, res) => {
 });
 var teams_default = router5;
 
-// artifacts/api-server/src/routes/subscriptions.ts
+// src/routes/subscriptions.ts
 import { Router as Router6 } from "express";
 import { eq as eq4 } from "drizzle-orm";
 var router6 = Router6();
@@ -1231,7 +1231,7 @@ router6.put("/me", requireAuth, async (req, res) => {
 });
 var subscriptions_default = router6;
 
-// artifacts/api-server/src/routes/index.ts
+// src/routes/index.ts
 var router7 = Router7();
 router7.use(health_default);
 router7.use(stats_default);
@@ -1241,7 +1241,7 @@ router7.use("/teams", teams_default);
 router7.use("/subscriptions", subscriptions_default);
 var routes_default = router7;
 
-// artifacts/api-server/src/lib/logger.ts
+// src/lib/logger.ts
 import pino from "pino";
 var isProduction = process.env.NODE_ENV === "production";
 var logger = pino({
@@ -1259,7 +1259,7 @@ var logger = pino({
   }
 });
 
-// artifacts/api-server/src/app.ts
+// src/app.ts
 var app = express();
 app.use(
   pinoHttp({
@@ -1287,7 +1287,7 @@ app.use(cookieParser());
 app.use("/api", routes_default);
 var app_default = app;
 
-// api/_entry.ts
+// ../../api/_entry.ts
 var entry_default = app_default;
 export {
   entry_default as default
