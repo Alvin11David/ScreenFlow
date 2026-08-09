@@ -73,10 +73,13 @@ export function Navbar() {
               <Moon className="w-4 h-4" />
             )}
           </button>
-          <div className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted border border-border text-xs text-muted-foreground cursor-pointer hover:text-foreground transition-colors">
+          <button
+            onClick={() => window.dispatchEvent(new CustomEvent("open-command-palette"))}
+            className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted border border-border text-xs text-muted-foreground cursor-pointer hover:text-foreground transition-colors"
+          >
             <Command className="w-3 h-3" />
             <span>K</span>
-          </div>
+          </button>
           {user ? (
             <a href="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Dashboard</a>
           ) : (
