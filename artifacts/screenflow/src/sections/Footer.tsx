@@ -1,3 +1,14 @@
+import { landingPages } from "@/lib/content";
+
+const guideLabels: Record<string, string> = {
+  "/screen-recorder": "Free screen recorder",
+  "/screen-recording-software": "Screen recording software",
+  "/how-to-record-your-screen": "How to record your screen",
+  "/record-zoom-meetings": "Record Zoom meetings",
+  "/record-gameplay": "Record gameplay",
+  "/best-free-screen-recorders": "Best free screen recorders",
+};
+
 const footerLinks: Record<string, Array<{ label: string; href: string }>> = {
   Product: [
     { label: "Features", href: "/#features" },
@@ -6,6 +17,10 @@ const footerLinks: Record<string, Array<{ label: string; href: string }>> = {
     { label: "Changelog", href: "/#blog" },
     { label: "Roadmap", href: "/#features" },
   ],
+  Guides: landingPages.map((page) => ({
+    label: guideLabels[page.path] ?? page.title,
+    href: page.path,
+  })),
   Resources: [
     { label: "Blog", href: "/#blog" },
     { label: "Help Center", href: "mailto:support@screenflow.io" },
@@ -25,7 +40,7 @@ export function Footer() {
   return (
     <footer className="border-t border-border bg-background pt-20 pb-10">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-10 mb-16">
           <div className="col-span-2">
             <div className="flex items-center gap-2 mb-6">
               <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-primary to-cyan-400 flex items-center justify-center text-white font-bold text-sm">
