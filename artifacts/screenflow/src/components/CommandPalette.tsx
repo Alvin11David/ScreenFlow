@@ -14,8 +14,13 @@ export function CommandPalette() {
         setOpen((open) => !open);
       }
     };
+    const openFromNavbar = () => setOpen(true);
     document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
+    window.addEventListener("open-command-palette", openFromNavbar);
+    return () => {
+      document.removeEventListener("keydown", down);
+      window.removeEventListener("open-command-palette", openFromNavbar);
+    };
   }, []);
 
   function close() {
