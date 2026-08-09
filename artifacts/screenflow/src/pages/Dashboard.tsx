@@ -83,7 +83,10 @@ export default function Dashboard() {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link href="/" className="text-xl font-bold text-foreground">ScreenFlow</Link>
-            <span className="text-sm text-muted-foreground">Dashboard</span>
+            <nav className="hidden sm:flex items-center gap-4 text-sm">
+              <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors">Home</Link>
+              <Link href="/dashboard" className="text-foreground font-medium">Dashboard</Link>
+            </nav>
           </div>
           <div className="flex items-center gap-3">
             <span className="text-sm text-muted-foreground">{user?.name}</span>
