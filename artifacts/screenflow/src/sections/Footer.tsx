@@ -23,7 +23,7 @@ const footerLinks: Record<string, Array<{ label: string; href: string }>> = {
   })),
   Resources: [
     { label: "Blog", href: "/#blog" },
-    { label: "Help Center", href: "mailto:support@screenflow.io" },
+    { label: "Help Center", href: "mailto:screenflowcom@gmail.com" },
     { label: "API Docs", href: "/#" },
     { label: "Status", href: "/#" },
   ],

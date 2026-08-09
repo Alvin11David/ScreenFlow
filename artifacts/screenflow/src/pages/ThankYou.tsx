@@ -132,8 +132,8 @@ export default function ThankYou() {
                 <Mail className="w-4 h-4 text-primary" />
                 <span>
                   Questions?{" "}
-                  <a href="mailto:support@screenflow.io" className="text-primary hover:text-primary/80 underline transition-colors">
-                    support@screenflow.io
+                  <a href="mailto:screenflowcom@gmail.com" className="text-primary hover:text-primary/80 underline transition-colors">
+                    screenflowcom@gmail.com
                   </a>
                 </span>
               </div>
