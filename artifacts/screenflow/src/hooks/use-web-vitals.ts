@@ -96,7 +96,7 @@ export function useWebVitals() {
 
     try {
       const lcpObserver = new PerformanceObserver((list) => {
-        const entries = list.getEntries() as LargestContentfulPaint[];
+        const entries = list.getEntries() as LcpLike[];
         const last = entries[entries.length - 1];
         if (last) {
           sendWebVital("lcp", last.startTime, ratingFor(last.startTime, 2500, 4000));
