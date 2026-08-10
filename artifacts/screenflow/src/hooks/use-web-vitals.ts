@@ -36,6 +36,16 @@ function reportNavigationTiming() {
   }
 }
 
+type LayoutShiftLike = PerformanceEntry & {
+  hadRecentInput?: boolean;
+  value?: number;
+};
+type InteractionLike = PerformanceEntry & {
+  interactionId?: number;
+  duration?: number;
+};
+type LcpLike = PerformanceEntry & { startTime: number };
+
 export function useWebVitals() {
   useEffect(() => {
     if (typeof window === "undefined" || typeof performance === "undefined") return;
@@ -51,9 +61,9 @@ export function useWebVitals() {
     try {
       const clsObserver = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          const shift = entry as LayoutShift;
+          const shift = entry as LayoutShiftLike;
           if (!shift.hadRecentInput) {
-            clsValue += shift.value;
+            clsValue += shift.value ?? 0;
             hasCls = true;
           }
         }
@@ -68,13 +78,17 @@ export function useWebVitals() {
     try {
       const inpObserver = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          const timing = entry as PerformanceEventTiming;
-          if (timing.interactionId > 0 && timing.duration > inp) {
-            inp = timing.duration;
+          const timing = entry as InteractionLike;
+          if ((timing.interactionId ?? 0) > 0 && (timing.duration ?? 0) > inp) {
+            inp = timing.duration ?? 0;
           }
         }
       });
-      inpObserver.observe({ type: "event", buffered: true, durationThreshold: 16 });
+      inpObserver.observe({
+        type: "event",
+        buffered: true,
+        durationThreshold: 16,
+      } as PerformanceObserverInit);
       observers.push(inpObserver);
     } catch {
       // event timing not supported
