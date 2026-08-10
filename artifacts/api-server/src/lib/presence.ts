@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
 import { db, presenceTable, usersTable } from "@workspace/db";
-import { eq, gt } from "drizzle-orm";
+import { eq, gt, and, isNotNull } from "drizzle-orm";
 
 export const ONLINE_WINDOW_MINUTES = 5;
 const HEARTBEAT_THROTTLE_MS = 60 * 1000;
@@ -61,13 +61,15 @@ export async function removeVisitorPresence(visitorId: string): Promise<void> {
 export async function countOnline() {
   const since = isOnlineSince();
   const [all] = await db
-    .select({ value: db.$count(presenceTable, gt(presenceTable.lastSeenAt, since)) })
+    .select({
+      value: db.$count(presenceTable, gt(presenceTable.lastSeenAt, since)),
+    })
     .from(presenceTable);
   const [auth] = await db
     .select({
       value: db.$count(
         presenceTable,
-        gt(presenceTable.lastSeenAt, since) && presenceTable.userId != null,
+        and(gt(presenceTable.lastSeenAt, since), isNotNull(presenceTable.userId)),
       ),
     })
     .from(presenceTable);
