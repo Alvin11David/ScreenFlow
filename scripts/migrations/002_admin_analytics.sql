@@ -20,8 +20,13 @@ CREATE TABLE IF NOT EXISTS presence (
   last_seen_at timestamp NOT NULL DEFAULT now()
 );
 
+-- Full unique index so that ON CONFLICT (user_id) inference matches. A partial
+-- index (WHERE user_id IS NOT NULL) would not be matched by ON CONFLICT unless
+-- its predicate is specified. Visitor rows always have user_id NULL, which does
+-- not conflict under a plain unique index.
+DROP INDEX IF EXISTS presence_user_id_idx;
 CREATE UNIQUE INDEX IF NOT EXISTS presence_user_id_idx
-  ON presence (user_id) WHERE user_id IS NOT NULL;
+  ON presence (user_id);
 CREATE INDEX IF NOT EXISTS presence_last_seen_at_idx
   ON presence (last_seen_at);
 
