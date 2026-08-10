@@ -54,6 +54,77 @@ paths:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
 
+  /admin/overview:
+    get:
+      operationId: getAdminOverview
+      tags: [admin]
+      summary: Get admin overview (signups, online users, performance, web vitals)
+      responses:
+        "200":
+          description: Admin overview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminOverviewResponse"
+        "401":
+          description: Not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: Forbidden - requires admin role
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /presence:
+    post:
+      operationId: reportPresence
+      tags: [presence]
+      summary: Report a presence heartbeat (authenticated or anonymous visitor)
+      security: []
+      responses:
+        "200":
+          description: Heartbeat recorded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+        "429":
+          description: Rate limited
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /rum:
+    post:
+      operationId: reportWebVital
+      tags: [presence]
+      summary: Report a web performance metric (Core Web Vitals)
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RumRequest"
+      responses:
+        "200":
+          description: Metric recorded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+        "429":
+          description: Rate limited
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
   /auth/register:
     post:
       operationId: register
@@ -416,6 +487,193 @@ components:
         - videosCreated
         - appStoreRating
         - countries
+
+    AuthProvider:
+      type: string
+      enum: [email, google, github, microsoft]
+
+    ProviderCounts:
+      type: object
+      properties:
+        email:
+          type: integer
+        google:
+          type: integer
+        github:
+          type: integer
+        microsoft:
+          type: integer
+      required:
+        - email
+        - google
+        - github
+        - microsoft
+
+    DailySignups:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        email:
+          type: integer
+        google:
+          type: integer
+        github:
+          type: integer
+        microsoft:
+          type: integer
+        total:
+          type: integer
+      required:
+        - date
+        - email
+        - google
+        - github
+        - microsoft
+        - total
+
+    SignupStats:
+      type: object
+      properties:
+        total:
+          type: integer
+        providers:
+          $ref: "#/components/schemas/ProviderCounts"
+        today:
+          type: integer
+        last7d:
+          type: integer
+        last30d:
+          type: integer
+        daily:
+          type: array
+          items:
+            $ref: "#/components/schemas/DailySignups"
+      required:
+        - total
+        - providers
+        - today
+        - last7d
+        - last30d
+        - daily
+
+    OnlineUsers:
+      type: object
+      properties:
+        current:
+          type: integer
+        authenticated:
+          type: integer
+        anonymous:
+          type: integer
+        windowMinutes:
+          type: integer
+      required:
+        - current
+        - authenticated
+        - anonymous
+        - windowMinutes
+
+    PerformanceMetrics:
+      type: object
+      properties:
+        uptimeSeconds:
+          type: integer
+        requestsTotal:
+          type: integer
+        requestsPerMinute:
+          type: number
+        errorRate:
+          type: number
+        avgLatencyMs:
+          type: number
+        p95LatencyMs:
+          type: number
+        p99LatencyMs:
+          type: number
+        dbStatus:
+          type: string
+          enum: [ok, error]
+        dbPingMs:
+          type: number
+        memoryMb:
+          type: number
+      required:
+        - uptimeSeconds
+        - requestsTotal
+        - requestsPerMinute
+        - errorRate
+        - avgLatencyMs
+        - p95LatencyMs
+        - p99LatencyMs
+        - dbStatus
+        - dbPingMs
+        - memoryMb
+
+    VitalsMetric:
+      type: object
+      properties:
+        avg:
+          type: number
+        p75:
+          type: number
+      required:
+        - avg
+        - p75
+
+    VitalsSummary:
+      type: object
+      properties:
+        lcp:
+          $ref: "#/components/schemas/VitalsMetric"
+        cls:
+          $ref: "#/components/schemas/VitalsMetric"
+        inp:
+          $ref: "#/components/schemas/VitalsMetric"
+        sampleCount:
+          type: integer
+      required:
+        - lcp
+        - cls
+        - inp
+        - sampleCount
+
+    AdminOverviewResponse:
+      type: object
+      properties:
+        signups:
+          $ref: "#/components/schemas/SignupStats"
+        onlineUsers:
+          $ref: "#/components/schemas/OnlineUsers"
+        performance:
+          $ref: "#/components/schemas/PerformanceMetrics"
+        webVitals:
+          $ref: "#/components/schemas/VitalsSummary"
+      required:
+        - signups
+        - onlineUsers
+        - performance
+        - webVitals
+
+    RumRequest:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [lcp, cls, inp, fcp, ttfb]
+        value:
+          type: number
+        rating:
+          type: string
+          enum: [good, needs-improvement, poor]
+        path:
+          type: string
+          maxLength: 500
+      required:
+        - type
+        - value
+        - rating
 
     RegisterRequest:
       type: object
