@@ -24,15 +24,10 @@ const footerLinks: Record<string, Array<{ label: string; href: string }>> = {
   Resources: [
     { label: "Blog", href: "/#blog" },
     { label: "Help Center", href: "mailto:screenflowcom@gmail.com" },
-    { label: "API Docs", href: "/#" },
-    { label: "Status", href: "/#" },
   ],
   Company: [
-    { label: "About", href: "/#" },
-    { label: "Careers", href: "/#" },
-    { label: "Privacy Policy", href: "/#" },
-    { label: "Terms of Service", href: "/#" },
-    { label: "Press", href: "/#" },
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Terms of Service", href: "/terms" },
   ],
 };
 
@@ -56,23 +51,6 @@ export function Footer() {
             <p className="text-muted-foreground text-sm max-w-xs mb-8 leading-relaxed">
               The screen recorder for creative professionals. Built with precision and care to help you share your best work.
             </p>
-            <div className="flex items-center gap-4">
-              {[
-                { name: "Twitter", href: "https://x.com/screenflow" },
-                { name: "GitHub", href: "https://github.com/screenflow" },
-                { name: "Discord", href: "https://discord.gg/screenflow" },
-              ].map((social) => (
-                <a
-                  key={social.name}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {social.name}
-                </a>
-              ))}
-            </div>
           </div>
 
           {Object.entries(footerLinks).map(([section, items]) => (

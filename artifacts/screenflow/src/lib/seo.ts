@@ -1,4 +1,5 @@
 import { homeFaqs, landingPages, type Faq } from "./content";
+import { legalPages } from "./legal";
 
 export const SITE_URL = "https://screen-flow-ltd.vercel.app";
 
@@ -154,6 +155,15 @@ export const seoRoutes: SeoRoute[] = [
         faqJsonLd(page.faqs),
         breadcrumbJsonLd(page.path, page.h1),
       ],
+    };
+  }),
+  ...legalPages.map((page): SeoRoute => {
+    return {
+      path: page.path,
+      title: page.title,
+      description: page.description,
+      keywords: [],
+      jsonLd: [],
     };
   }),
 ];

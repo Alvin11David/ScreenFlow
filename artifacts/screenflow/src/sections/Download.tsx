@@ -81,14 +81,6 @@ export function DownloadSection() {
               <span>No credit card required</span>
               <span className="hidden sm:block w-px h-4 bg-border" />
               <span>14-day free trial on Pro</span>
-              <span className="hidden sm:block w-px h-4 bg-border" />
-              <a
-                href="/#"
-                data-testid="link-release-notes"
-                className="flex items-center gap-1 text-primary hover:text-primary/80 transition-colors"
-              >
-                Release notes <ArrowRight className="w-3.5 h-3.5" />
-              </a>
             </motion.div>
           </div>
         </motion.div>

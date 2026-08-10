@@ -12,7 +12,9 @@ import Register from "@/pages/Register";
 import ForgotPassword from "@/pages/ForgotPassword";
 import Dashboard from "@/pages/Dashboard";
 import LandingPage from "@/pages/LandingPage";
+import LegalPage from "@/pages/LegalPage";
 import { landingPages } from "@/lib/content";
+import { legalPages } from "@/lib/legal";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +30,11 @@ function Router() {
       {landingPages.map((page) => (
         <Route key={page.path} path={page.path}>
           <LandingPage path={page.path} />
+        </Route>
+      ))}
+      {legalPages.map((page) => (
+        <Route key={page.path} path={page.path}>
+          <LegalPage path={page.path} />
         </Route>
       ))}
       <Route component={NotFound} />
