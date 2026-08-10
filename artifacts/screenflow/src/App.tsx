@@ -15,6 +15,8 @@ import LandingPage from "@/pages/LandingPage";
 import LegalPage from "@/pages/LegalPage";
 import { landingPages } from "@/lib/content";
 import { legalPages } from "@/lib/legal";
+import { usePresence } from "@/hooks/use-presence";
+import { useWebVitals } from "@/hooks/use-web-vitals";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +45,9 @@ function Router() {
 }
 
 function App({ ssrPath }: { ssrPath?: string }) {
+  usePresence();
+  useWebVitals();
+
   return (
     <ThemeProvider defaultTheme="dark" storageKey="screenflow-theme">
       <QueryClientProvider client={queryClient}>
