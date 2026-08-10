@@ -10,6 +10,7 @@ import { Blog } from "@/sections/Blog";
 import { DownloadSection } from "@/sections/Download";
 import { Footer } from "@/sections/Footer";
 import { CommandPalette } from "@/components/CommandPalette";
+import { ReleaseNotesDialog } from "@/components/ReleaseNotesDialog";
 import { motion, useScroll } from "framer-motion";
 
 export default function Home() {
@@ -65,6 +66,7 @@ export default function Home() {
 
       <div className="relative z-10">
         <CommandPalette />
+        <ReleaseNotesDialog />
         <Navbar />
         <Hero />
         <SocialProof />
