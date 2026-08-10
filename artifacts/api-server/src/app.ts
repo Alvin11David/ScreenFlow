@@ -39,6 +39,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+app.use((req, res, next) => {
+  const start = performance.now();
+  res.on("finish", () => {
+    recordRequest({
+      statusCode: res.statusCode,
+      durationMs: performance.now() - start,
+    });
+  });
+  next();
+});
+
 app.use("/api", router);
 
 export default app;
