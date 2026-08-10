@@ -5,3 +5,5 @@ export * from "./teams";
 export * from "./team-members";
 export * from "./subscriptions";
 export * from "./password-reset-tokens";
+export * from "./presence";
+export * from "./web-vitals";
