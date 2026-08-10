@@ -47,3 +47,6 @@ Thumbs.db
 # Replit
 .cache/
 .local/
+
+# API spec source (regenerated locally; generated clients are committed instead)
+lib/api-spec/openapi.yaml
