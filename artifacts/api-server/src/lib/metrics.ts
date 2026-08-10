@@ -53,9 +53,9 @@ export function snapshotMetrics() {
     uptimeSeconds: Math.floor((Date.now() - startTime) / 1000),
     requestsTotal: total,
     requestsPerMinute:
-      total === 0
+      total === 0 || Date.now() === startTime
         ? 0
-        : (total / ((Date.now() - startTime) / 1000 / 60)).toFixed(2),
+        : Number((total / ((Date.now() - startTime) / 1000 / 60)).toFixed(2)),
     errorRate: Number(errorRate.toFixed(4)),
     avgLatencyMs:
       counters.latencySamples === 0
