@@ -19,6 +19,10 @@ tags:
     description: Subscription management
   - name: stats
     description: Platform statistics
+  - name: admin
+    description: Admin-only operations
+  - name: presence
+    description: Presence and real-user monitoring
 security:
   - bearerAuth: []
   - cookieAuth: []
