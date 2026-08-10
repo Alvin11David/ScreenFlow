@@ -1,5 +1,6 @@
 import { type Request, type Response, type NextFunction } from "express";
 import { getSessionUserId, getUserById } from "../lib/auth";
+import { touchUserPresence } from "../lib/presence";
 
 export interface AuthenticatedRequest extends Request {
   userId?: number;
@@ -31,6 +32,7 @@ export async function requireAuth(
   }
 
   req.userId = userId;
+  await touchUserPresence(userId);
   next();
 }
 
