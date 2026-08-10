@@ -7,7 +7,8 @@
  */
 
 export interface DailySignups {
-  date: Date;
+  /** Date in YYYY-MM-DD format (UTC) */
+  date: string;
   email: number;
   google: number;
   github: number;

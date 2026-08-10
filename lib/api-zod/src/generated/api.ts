@@ -43,7 +43,7 @@ export const GetAdminOverviewResponse = zod.object({
   "last7d": zod.number(),
   "last30d": zod.number(),
   "daily": zod.array(zod.object({
-  "date": zod.coerce.date(),
+  "date": zod.string().describe('Date in YYYY-MM-DD format (UTC)'),
   "email": zod.number(),
   "google": zod.number(),
   "github": zod.number(),

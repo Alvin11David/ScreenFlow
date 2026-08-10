@@ -514,7 +514,7 @@ components:
       properties:
         date:
           type: string
-          format: date
+          description: Date in YYYY-MM-DD format (UTC)
         email:
           type: integer
         google:
