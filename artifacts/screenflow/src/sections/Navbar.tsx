@@ -5,11 +5,9 @@ import { Menu, Command, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useTheme } from "@/components/ThemeProvider";
-import { useAuth } from "@/hooks/use-auth";
 import { APP_URL } from "@/lib/utils";
 
 export function Navbar() {
-  const { user } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, setTheme } = useTheme();
 
@@ -135,7 +133,12 @@ export function Navbar() {
                   )}
                 </nav>
                 <div className="flex flex-col gap-3">
-                  <Button
+          {user ? (
+            <a href="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Dashboard</a>
+          ) : (
+            <a href="/login" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Sign in</a>
+          )}
+          <Button
                     onClick={() => {
                       window.open(APP_URL, "_blank", "noopener,noreferrer");
                     }}

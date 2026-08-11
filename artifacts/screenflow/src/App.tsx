@@ -7,9 +7,6 @@ import { AuthProvider } from "@/hooks/use-auth";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import ThankYou from "@/pages/ThankYou";
-import Login from "@/pages/Login";
-import Register from "@/pages/Register";
-import ForgotPassword from "@/pages/ForgotPassword";
 import Dashboard from "@/pages/Dashboard";
 import LandingPage from "@/pages/LandingPage";
 import LegalPage from "@/pages/LegalPage";
@@ -25,9 +22,6 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/thanks" component={ThankYou} />
-      <Route path="/login" component={Login} />
-      <Route path="/register" component={Register} />
-      <Route path="/forgot-password" component={ForgotPassword} />
       <Route path="/dashboard" component={Dashboard} />
       {landingPages.map((page) => (
         <Route key={page.path} path={page.path}>
