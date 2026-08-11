@@ -78,11 +78,6 @@ export function Navbar() {
             <Command className="w-3 h-3" />
             <span>K</span>
           </button>
-          {user ? (
-            <a href="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Dashboard</a>
-          ) : (
-            <a href="/login" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Sign in</a>
-          )}
           <Button
             data-testid="button-go-to-app-nav"
             onClick={() => {
@@ -122,23 +117,9 @@ export function Navbar() {
                       {link.name}
                     </a>
                   ))}
-                  {user ? (
-                    <Link href="/dashboard" className="text-lg font-medium text-foreground">
-                      Dashboard
-                    </Link>
-                  ) : (
-                    <Link href="/login" className="text-lg font-medium text-muted-foreground hover:text-foreground transition-colors">
-                      Sign in
-                    </Link>
-                  )}
                 </nav>
                 <div className="flex flex-col gap-3">
-          {user ? (
-            <a href="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Dashboard</a>
-          ) : (
-            <a href="/login" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Sign in</a>
-          )}
-          <Button
+                  <Button
                     onClick={() => {
                       window.open(APP_URL, "_blank", "noopener,noreferrer");
                     }}
