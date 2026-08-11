@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Command } from "cmdk";
-import { Search, Laptop, Settings, CreditCard, HelpCircle } from "lucide-react";
+import { Search, Laptop, CreditCard, HelpCircle } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { APP_URL } from "@/lib/utils";
 

@@ -128,11 +128,7 @@ export function Pricing() {
               <Button
                 data-testid={`button-plan-${plan.name.toLowerCase()}`}
                 onClick={() => {
-                  if (plan.name === "Free") {
-                    window.open(APP_URL, "_blank", "noopener,noreferrer");
-                  } else {
-                    window.location.href = "/register";
-                  }
+                  window.open(APP_URL, "_blank", "noopener,noreferrer");
                 }}
                 className={`w-full mb-8 rounded-full h-11 font-semibold ${
                   plan.popular

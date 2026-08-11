@@ -5,7 +5,7 @@ const browser = await puppeteer.launch({ headless: true, executablePath: "C:/Pro
 const page = await browser.newPage();
 await page.setViewport({ width: 1440, height: 900 });
 
-await page.goto("http://localhost:5173/login", { waitUntil: "load", timeout: 60000 });
+await page.goto("http://localhost:5173/", { waitUntil: "load", timeout: 60000 });
 await new Promise((r) => setTimeout(r, 4000));
 
 async function grabFrame() {

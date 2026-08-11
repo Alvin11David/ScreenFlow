@@ -8,7 +8,7 @@ const browser = await puppeteer.launch({
 });
 const page = await browser.newPage();
 await page.setViewport({ width: 1440, height: 900 });
-await page.goto("http://localhost:5173/login", { waitUntil: "load", timeout: 60000 });
+await page.goto("http://localhost:5173/", { waitUntil: "load", timeout: 60000 });
 await new Promise((r) => setTimeout(r, 4000));
 
 await page.screenshot({ path: "C:/Users/ALVIN/AppData/Local/Temp/opencode/beam.png" });
