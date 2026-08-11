@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Command } from "cmdk";
-import { Search, Laptop, Settings, CreditCard, User, HelpCircle, LogOut } from "lucide-react";
+import { Search, Laptop, Settings, CreditCard, HelpCircle } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { APP_URL } from "@/lib/utils";
 
@@ -66,23 +66,6 @@ export function CommandPalette() {
               >
                 <HelpCircle className="mr-2 h-4 w-4" />
                 <span>FAQ</span>
-              </Command.Item>
-            </Command.Group>
-            <Command.Separator className="my-1 h-px bg-white/10" />
-            <Command.Group heading="Account" className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
-              <Command.Item
-                className="flex cursor-pointer items-center rounded-sm px-2 py-2.5 text-sm hover:bg-white/10 aria-selected:bg-white/10 transition-colors"
-                onSelect={() => { close(); window.location.href = "/login"; }}
-              >
-                <LogOut className="mr-2 h-4 w-4" />
-                <span>Sign in</span>
-              </Command.Item>
-              <Command.Item
-                className="flex cursor-pointer items-center rounded-sm px-2 py-2.5 text-sm hover:bg-white/10 aria-selected:bg-white/10 transition-colors"
-                onSelect={() => { close(); window.location.href = "/register"; }}
-              >
-                <User className="mr-2 h-4 w-4" />
-                <span>Create account</span>
               </Command.Item>
             </Command.Group>
           </Command.List>

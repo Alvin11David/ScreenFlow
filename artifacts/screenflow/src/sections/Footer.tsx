@@ -43,11 +43,6 @@ export function Footer() {
               </div>
               <span className="font-bold text-lg tracking-tight text-foreground">ScreenFlow</span>
             </div>
-            <div className="flex items-center gap-2 mb-4">
-              <a href="/login" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Sign in</a>
-              <span className="text-muted-foreground">·</span>
-              <a href="/register" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Get started</a>
-            </div>
             <p className="text-muted-foreground text-sm max-w-xs mb-8 leading-relaxed">
               The screen recorder for creative professionals. Built with precision and care to help you share your best work.
             </p>
